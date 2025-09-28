@@ -171,9 +171,21 @@ function Show-URLs {
     Write-Host ""
     Write-Host "📊 Servicios disponibles:" -ForegroundColor Yellow
     Write-Host "  • Portfolio Principal: http://localhost" -ForegroundColor White
+    Write-Host ""
+    Write-Host "🐍 Proyectos Python Backend:" -ForegroundColor Cyan
     Write-Host "  • Proyecto 1 (API): http://localhost/proyecto1/" -ForegroundColor White
     Write-Host "  • Proyecto 3 (NLP): http://localhost/proyecto3/" -ForegroundColor White
     Write-Host "  • Proyecto 5 (ML): http://localhost/proyecto5/" -ForegroundColor White
+    Write-Host ""
+    Write-Host "🏗️ Proyectos Arquitectura de Software:" -ForegroundColor Cyan
+    Write-Host "  • Proyecto 6 (Java): http://localhost:8081/" -ForegroundColor White
+    Write-Host "  • Proyecto 7 (Observabilidad): http://localhost:3000/" -ForegroundColor White
+    Write-Host "  • Proyecto 8 (CI/CD): http://localhost:8080/" -ForegroundColor White
+    Write-Host "  • Proyecto 9 (React): http://localhost:3001/" -ForegroundColor White
+    Write-Host "  • Proyecto 10 (Kafka): http://localhost:8080/" -ForegroundColor White
+    Write-Host "  • Proyecto 11 (Go): http://localhost:8082/" -ForegroundColor White
+    Write-Host ""
+    Write-Host "🔧 Servicios de Monitoreo:" -ForegroundColor Cyan
     Write-Host "  • Airflow: http://localhost/airflow/" -ForegroundColor White
     Write-Host "  • MLflow: http://localhost/mlflow/" -ForegroundColor White
     Write-Host "  • Grafana: http://localhost/grafana/" -ForegroundColor White

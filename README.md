@@ -200,17 +200,27 @@ cd ../05-sistema-recomendaciones-ml && pip install -r requirements.txt
 
 ## 🌐 Servicios Disponibles
 
-### APIs REST
-- **Proyecto 1:** http://localhost:8001 (docs: /docs)
-- **Proyecto 3:** http://localhost:8003 (docs: /docs)
-- **Proyecto 5:** http://localhost:8005 (docs: /docs)
+### Portfolio Principal
+- **Nginx:** http://localhost (página principal con enlaces a todos los proyectos)
 
-### Servicios de Soporte
-- **Página Principal:** http://localhost
-- **Airflow UI:** http://localhost:8080 (admin/admin)
-- **MLflow:** http://localhost:5000
-- **Grafana:** http://localhost:3000 (admin/admin123)
-- **Prometheus:** http://localhost:9090
+### Proyectos Originales (Python Backend)
+- **Proyecto 1 (API):** http://localhost/proyecto1/ (docs: /docs)
+- **Proyecto 3 (NLP):** http://localhost/proyecto3/ (docs: /docs)
+- **Proyecto 5 (ML):** http://localhost/proyecto5/ (docs: /docs)
+
+### Proyectos de Arquitectura de Software
+- **Proyecto 6 (Microservicios Java):** http://localhost:8081/
+- **Proyecto 7 (Observabilidad):** http://localhost:3000/
+- **Proyecto 8 (CI/CD):** http://localhost:8080/ (GitHub Actions)
+- **Proyecto 9 (Frontend React):** http://localhost:3001/
+- **Proyecto 10 (Kafka):** http://localhost:8080/ (Kafka UI)
+- **Proyecto 11 (Go):** http://localhost:8082/
+
+### Servicios de Monitoreo y Herramientas
+- **Airflow:** http://localhost/airflow/ (admin/admin)
+- **MLflow:** http://localhost/mlflow/
+- **Grafana:** http://localhost/grafana/ (admin/admin123)
+- **Prometheus:** http://localhost/prometheus/
 
 ## 🔧 Comandos Útiles
 
