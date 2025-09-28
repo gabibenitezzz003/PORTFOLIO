@@ -2,7 +2,7 @@
 
 ## 📋 Descripción del Proyecto
 
-Sistema completo de **observabilidad y monitoreo** para arquitecturas de microservicios, implementando las **3 pilares de la observabilidad**: métricas, logs y traces. Demuestra experiencia en **DevOps**, **monitoreo de aplicaciones** y **optimización de rendimiento**.
+Sistema completo de **observabilidad y monitoreo** para arquitecturas de microservicios, implementando las **3 pilares de la observabilidad**: métricas, logs y traces. 
 
 ## 🎯 Objetivos Arquitectónicos
 

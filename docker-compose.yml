@@ -209,8 +209,8 @@ services:
       - postgres-airflow
     command: >
       bash -c "
-        airflow db init &&
-        airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin &&
+        airflow db init || true &&
+        airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin || true &&
         airflow webserver --host 0.0.0.0 --port 8080
       "
     healthcheck:
@@ -319,7 +319,6 @@ services:
     image: python:3.11-slim
     container_name: portfolio_mlflow
     environment:
-      MLFLOW_BACKEND_STORE_URI: postgresql://usuario:password123@postgres-proyecto1:5432/sistema_gestion_datos
       MLFLOW_DEFAULT_ARTIFACT_ROOT: /opt/mlflow/artifacts
     volumes:
       - mlflow_artifacts:/opt/mlflow/artifacts
@@ -327,13 +326,11 @@ services:
       - "5000:5000"
     networks:
       - portfolio_red
-    depends_on:
-      - postgres-proyecto1
     command: >
       bash -c "
         apt-get update && apt-get install -y curl &&
-        pip install --no-cache-dir mlflow==2.8.1 psycopg2-binary==2.9.9 &&
-        mlflow server --backend-store-uri postgresql://usuario:password123@postgres-proyecto1:5432/sistema_gestion_datos --default-artifact-root /opt/mlflow/artifacts --host 0.0.0.0 --port 5000
+        pip install --no-cache-dir mlflow==2.8.1 &&
+        mlflow server --default-artifact-root /opt/mlflow/artifacts --host 0.0.0.0 --port 5000
       "
     restart: unless-stopped
     healthcheck:

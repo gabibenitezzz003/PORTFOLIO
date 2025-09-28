@@ -281,6 +281,3 @@ mvn gatling:test
 5. **Chaos Engineering** para testing de resiliencia
 
 ---
-
-**Desarrollado por Gabriel - Arquitecto de Software**  
-*Demostrando experiencia en arquitecturas de microservicios, patrones de diseño avanzados y tecnologías modernas*

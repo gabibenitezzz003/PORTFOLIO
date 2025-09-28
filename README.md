@@ -160,27 +160,28 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 ### Opción 1: Script Automático (Recomendado)
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
+git clone https://github.com/gabibenitezzz003/PORTFOLIO.git
 cd PORTFOLIO
 
-# Dar permisos de ejecución
-chmod +x scripts/*.sh
+# Windows (PowerShell)
+.\scripts\inicializar-portfolio.ps1
 
-# Iniciar todo el portfolio
-./scripts/start-portfolio.sh
+# Linux/Mac (Bash)
+chmod +x scripts/*.sh
+./scripts/inicializar-portfolio.sh
 ```
 
 ### Opción 2: Docker Compose Manual
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
+git clone https://github.com/gabibenitezzz003/PORTFOLIO.git
 cd PORTFOLIO
 
 # Iniciar servicios
 docker-compose up -d
 
 # Verificar estado
-./scripts/health-check.sh
+docker-compose ps
 ```
 
 ### Opción 3: Instalación Local

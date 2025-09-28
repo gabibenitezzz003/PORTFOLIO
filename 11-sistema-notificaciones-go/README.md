@@ -8,7 +8,6 @@ Sistema de notificaciones en tiempo real desarrollado en **Go** implementando **
 
 - **Arquitectura Limpia**: Separación clara de responsabilidades
 - **Principios SOLID**: Aplicados en toda la estructura
-- **Nomenclatura en Español**: Consistente en todo el código
 - **Performance**: Alta concurrencia con goroutines
 - **Escalabilidad**: Diseño horizontal y distribuido
 

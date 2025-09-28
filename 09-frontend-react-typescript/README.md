@@ -2,8 +2,7 @@
 
 ## 📋 Descripción del Proyecto
 
-Aplicación frontend moderna desarrollada con **React 18**, **TypeScript**, **Next.js** y **Vite**, implementando **patrones de diseño avanzados**, **arquitectura escalable** y **mejores prácticas** de desarrollo frontend. Demuestra experiencia en **frameworks modernos** y **liderazgo técnico**.
-
+Aplicación frontend moderna desarrollada con **React 18**, **TypeScript**, **Next.js** y **Vite**, implementando **patrones de diseño avanzados**, **arquitectura escalable** y **mejores prácticas** de desarrollo frontend. 
 ## 🎯 Objetivos Arquitectónicos
 
 - **Arquitectura Escalable**: Componentes reutilizables y modulares
@@ -459,7 +458,3 @@ spec:
 4. **AI Integration**: Integración con IA
 5. **Web3**: Integración con blockchain
 
----
-
-**Desarrollado por Gabriel - Arquitecto de Software**  
-*Demostrando experiencia en React, TypeScript, arquitectura frontend y liderazgo técnico*

@@ -2,7 +2,7 @@
 
 ## 📋 Descripción del Proyecto
 
-Sistema de **arquitectura distribuida** implementando **event-driven architecture** con **Apache Kafka**, **Event Sourcing**, **CQRS** y **Saga Pattern**. Demuestra experiencia en **sistemas distribuidos**, **escalabilidad horizontal** y **patrones de microservicios avanzados**.
+Sistema de **arquitectura distribuida** implementando **event-driven architecture** con **Apache Kafka**, **Event Sourcing**, **CQRS** y **Saga Pattern**.
 
 ## 🎯 Objetivos Arquitectónicos
 
@@ -470,6 +470,3 @@ describe('OrderSaga', () => {
 5. **Quantum Computing**: Preparación para computación cuántica
 
 ---
-
-**Desarrollado por Gabriel - Arquitecto de Software**  
-*Demostrando experiencia en arquitecturas distribuidas, event streaming y patrones avanzados de microservicios*

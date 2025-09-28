@@ -2,7 +2,7 @@
 
 ## 📋 Descripción del Proyecto
 
-Sistema completo de **CI/CD (Continuous Integration/Continuous Deployment)** implementando **DevOps** moderno con GitHub Actions, Docker, Kubernetes y **Infrastructure as Code**. Demuestra experiencia en **automatización**, **testing automatizado** y **metodologías ágiles**.
+Sistema completo de **CI/CD (Continuous Integration/Continuous Deployment)** implementando **DevOps** moderno con GitHub Actions, Docker, Kubernetes y **Infrastructure as Code**. 
 
 ## 🎯 Objetivos Arquitectónicos
 
@@ -396,6 +396,3 @@ spec:
 5. **Compliance Automation**: Automatización de compliance
 
 ---
-
-**Desarrollado por Gabriel - Arquitecto de Software**  
-*Demostrando experiencia en CI/CD, DevOps y automatización de procesos de desarrollo*
