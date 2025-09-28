@@ -187,6 +187,6 @@ docker-compose ps
 
 - **Email:** gabibenitezzz003@gmail.com
 - **LinkedIn:**https://linkedin.com/in/gabibenitezzz003
-- **GitHub:** [@gabibenitezzz003](https://github.com/gabibenitezzz003/PORTFOLIO)
+- **GitHub:** [@gabibenitezzz003](https://github.com/gabibenitezzz003/PORTFOLIO
 
 ---
