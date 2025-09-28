@@ -1,0 +1,336 @@
+name: Pipeline CI/CD Principal
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      ambiente:
+        description: 'Ambiente de despliegue'
+        required: true
+        default: 'desarrollo'
+        type: choice
+        options:
+        - desarrollo
+        - staging
+        - produccion
+
+env:
+  REGISTRO_DOCKER: ghcr.io
+  IMAGEN_NOMBRE: ${{ github.repository }}
+  VERSION: ${{ github.sha }}
+
+jobs:
+  # Job de validación de código
+  validar-codigo:
+    name: Validar Código
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: |
+          npm ci
+          npm install -g @commitlint/cli @commitlint/config-conventional
+
+      - name: Validar commits
+        run: |
+          npx commitlint --from HEAD~1 --to HEAD --verbose
+
+      - name: Linting
+        run: |
+          npm run lint
+
+      - name: Formateo de código
+        run: |
+          npm run format:check
+
+      - name: Validar tipos TypeScript
+        run: |
+          npm run type-check
+
+  # Job de testing
+  ejecutar-tests:
+    name: Ejecutar Tests
+    runs-on: ubuntu-latest
+    needs: validar-codigo
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar tests unitarios
+        run: |
+          npm run test:unit -- --coverage --watchAll=false
+
+      - name: Ejecutar tests de integración
+        run: |
+          npm run test:integration
+
+      - name: Ejecutar tests E2E
+        run: |
+          npm run test:e2e
+
+      - name: Subir cobertura a Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+  # Job de análisis de seguridad
+  analisis-seguridad:
+    name: Análisis de Seguridad
+    runs-on: ubuntu-latest
+    needs: validar-codigo
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Auditoría de seguridad NPM
+        run: |
+          npm audit --audit-level moderate
+
+      - name: Análisis de vulnerabilidades con Snyk
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+      - name: Análisis de código con CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+  # Job de build y test de Docker
+  build-docker:
+    name: Build Docker
+    runs-on: ubuntu-latest
+    needs: [ejecutar-tests, analisis-seguridad]
+    outputs:
+      imagen-digest: ${{ steps.build.outputs.digest }}
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login a GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRO_DOCKER }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extraer metadatos
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRO_DOCKER }}/${{ env.IMAGEN_NOMBRE }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build y push imagen
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Análisis de imagen con Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.REGISTRO_DOCKER }}/${{ env.IMAGEN_NOMBRE }}:${{ github.sha }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Subir resultados Trivy
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Job de despliegue en desarrollo
+  desplegar-desarrollo:
+    name: Desplegar en Desarrollo
+    runs-on: ubuntu-latest
+    needs: build-docker
+    if: github.ref == 'refs/heads/develop' || github.event_name == 'workflow_dispatch'
+    environment: desarrollo
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.0'
+
+      - name: Configurar kubeconfig
+        run: |
+          echo "${{ secrets.KUBE_CONFIG_DESARROLLO }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Desplegar en Kubernetes
+        run: |
+          export KUBECONFIG=kubeconfig
+          envsubst < k8s/desarrollo/deployment.yaml | kubectl apply -f -
+          kubectl rollout status deployment/portfolio-app -n desarrollo
+
+      - name: Ejecutar smoke tests
+        run: |
+          npm run test:smoke -- --env=desarrollo
+
+  # Job de despliegue en staging
+  desplegar-staging:
+    name: Desplegar en Staging
+    runs-on: ubuntu-latest
+    needs: [build-docker, desplegar-desarrollo]
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.ambiente == 'staging')
+    environment: staging
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.0'
+
+      - name: Configurar kubeconfig
+        run: |
+          echo "${{ secrets.KUBE_CONFIG_STAGING }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Desplegar en Kubernetes
+        run: |
+          export KUBECONFIG=kubeconfig
+          envsubst < k8s/staging/deployment.yaml | kubectl apply -f -
+          kubectl rollout status deployment/portfolio-app -n staging
+
+      - name: Ejecutar tests de regresión
+        run: |
+          npm run test:regression -- --env=staging
+
+  # Job de despliegue en producción
+  desplegar-produccion:
+    name: Desplegar en Producción
+    runs-on: ubuntu-latest
+    needs: [build-docker, desplegar-staging]
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.ambiente == 'produccion')
+    environment: produccion
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.0'
+
+      - name: Configurar kubeconfig
+        run: |
+          echo "${{ secrets.KUBE_CONFIG_PRODUCCION }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Desplegar en Kubernetes con Blue-Green
+        run: |
+          export KUBECONFIG=kubeconfig
+          ./scripts/blue-green-deployment.sh
+
+      - name: Ejecutar tests de humo en producción
+        run: |
+          npm run test:smoke -- --env=produccion
+
+      - name: Notificar despliegue exitoso
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          channel: '#deployments'
+          text: '🚀 Despliegue exitoso en producción'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # Job de limpieza
+  limpiar-recursos:
+    name: Limpiar Recursos
+    runs-on: ubuntu-latest
+    needs: [desplegar-produccion]
+    if: always()
+    steps:
+      - name: Limpiar imágenes Docker antiguas
+        run: |
+          docker system prune -f
+          docker image prune -f
+
+      - name: Limpiar cache de GitHub Actions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const { data: caches } = await github.rest.actions.getActionsCacheList({
+              owner,
+              repo,
+              per_page: 100
+            });
+            
+            const oldCaches = caches.actions_caches.filter(cache => {
+              const createdAt = new Date(cache.created_at);
+              const thirtyDaysAgo = new Date();
+              thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+              return createdAt < thirtyDaysAgo;
+            });
+            
+            for (const cache of oldCaches) {
+              await github.rest.actions.deleteActionsCacheById({
+                owner,
+                repo,
+                cache_id: cache.id
+              });
+            }

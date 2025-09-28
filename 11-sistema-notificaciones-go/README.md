@@ -2,7 +2,7 @@
 
 ## 📋 Descripción del Proyecto
 
-Sistema de notificaciones en tiempo real desarrollado en **Go** implementando **Clean Architecture**, **principios SOLID** y **patrones de diseño modernos**. Demuestra experiencia en **Go**, **microservicios**, **WebSockets** y **liderazgo técnico**.
+Sistema de notificaciones en tiempo real desarrollado en **Go** implementando **Clean Architecture**, **principios SOLID** y **patrones de diseño modernos**. 
 
 ## 🎯 Objetivos Arquitectónicos
 
@@ -316,7 +316,6 @@ jobs:
 
 - ✅ **Arquitectura limpia** con separación de responsabilidades
 - ✅ **Principios SOLID** aplicados consistentemente
-- ✅ **Nomenclatura en español** en todo el código
 - ✅ **Performance optimizada** con goroutines
 - ✅ **Testing completo** con 90%+ cobertura
 - ✅ **WebSocket** para notificaciones en tiempo real
@@ -331,6 +330,3 @@ jobs:
 5. **Multi-tenant**: Soporte multi-tenant
 
 ---
-
-**Desarrollado por Gabriel - Arquitecto de Software**  
-*Demostrando experiencia en Go, Clean Architecture, microservicios y liderazgo técnico*
