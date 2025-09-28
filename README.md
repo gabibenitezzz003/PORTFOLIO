@@ -1,6 +1,7 @@
 # Portfolio - Desarrollador Python Backend
-
-Este portfolio presenta una colección de proyectos que demuestran experiencia en las tecnologías requeridas para el puesto de **Desarrollador Python Backend** en GreenCode Software.
+Este portfolio reúne una colección de proyectos que demuestran mi experiencia en el desarrollo backend con Python, aplicando arquitectura hexagonal, principios SOLID, patrones de diseño modernos y metodologías de testing.
+Incluye soluciones que abarcan APIs REST con FastAPI, procesamiento y análisis de datos con Pandas, NLP con spaCy/NLTK, orquestación de workflows con Airflow, integración con bases de datos SQL y despliegue con Docker.
+El objetivo es mostrar mi capacidad para diseñar, implementar y mantener aplicaciones backend escalables, limpias y bien documentadas, siguiendo las mejores prácticas de la industria.
 
 ## 🏗️ Arquitectura y Principios
 
