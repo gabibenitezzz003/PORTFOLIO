@@ -4,8 +4,8 @@ Dependencias para inyección de dependencias
 """
 from fastapi import Depends
 from sqlalchemy.orm import Session
-from ...infraestructura.base_datos.configuracion_bd import obtener_sesion
-from ...infraestructura.persistencia.repositorio_usuario_sqlalchemy import RepositorioUsuarioSQLAlchemy
+from infraestructura.base_datos.configuracion_bd import obtener_sesion
+from infraestructura.persistencia.repositorio_usuario_sqlalchemy import RepositorioUsuarioSQLAlchemy
 
 
 def obtener_repositorio_usuario(

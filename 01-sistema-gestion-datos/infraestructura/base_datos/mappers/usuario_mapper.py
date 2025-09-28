@@ -3,10 +3,10 @@ Mapper Usuario - Capa de Infraestructura
 Convierte entre entidades de dominio y modelos de base de datos
 """
 from typing import Optional
-from ...dominio.entidades.usuario import Usuario
-from ...dominio.value_objects.email import Email
-from ...dominio.value_objects.nombre_usuario import NombreUsuario
-from ...dominio.value_objects.contraseña import Contraseña
+from dominio.entidades.usuario import Usuario
+from dominio.value_objects.email import Email
+from dominio.value_objects.nombre_usuario import NombreUsuario
+from dominio.value_objects.contraseña import Contraseña
 from ..modelos.usuario_modelo import UsuarioModelo
 
 

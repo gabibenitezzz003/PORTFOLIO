@@ -7,8 +7,8 @@ from typing import Dict, Any, List, Optional
 import structlog
 from datetime import datetime
 
-from ...dominio.algoritmos.algoritmo_sentimientos import AlgoritmoSentimientos
-from ...dominio.entidades.analisis_sentimiento import AnalisisSentimiento, CategoriaSentimiento, ModeloSentimiento
+from dominio.algoritmos.algoritmo_sentimientos import AlgoritmoSentimientos
+from dominio.entidades.analisis_sentimiento import AnalisisSentimiento, CategoriaSentimiento, ModeloSentimiento
 
 
 class AlgoritmoSpacySentimientos(AlgoritmoSentimientos):

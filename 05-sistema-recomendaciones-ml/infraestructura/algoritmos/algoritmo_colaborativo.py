@@ -12,8 +12,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 import joblib
 
-from ...dominio.algoritmos.algoritmo_recomendacion import AlgoritmoRecomendacion
-from ...dominio.entidades.recomendacion import Recomendacion, TipoAlgoritmo, TipoRecomendacion
+from dominio.algoritmos.algoritmo_recomendacion import AlgoritmoRecomendacion
+from dominio.entidades.recomendacion import Recomendacion, TipoAlgoritmo, TipoRecomendacion
 
 
 class AlgoritmoColaborativo(AlgoritmoRecomendacion):

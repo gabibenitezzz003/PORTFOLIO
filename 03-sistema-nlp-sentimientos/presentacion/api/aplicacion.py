@@ -12,10 +12,10 @@ from contextlib import asynccontextmanager
 from typing import Dict, Any, List, Optional
 import asyncio
 
-from ...aplicacion.servicios.servicio_sentimientos import ServicioSentimientos
-from ...aplicacion.servicios.servicio_entidades import ServicioEntidades
-from ...infraestructura.algoritmos.spacy_sentimientos import AlgoritmoSpacySentimientos
-from ...infraestructura.algoritmos.spacy_entidades import AlgoritmoSpacyEntidades
+from aplicacion.servicios.servicio_sentimientos import ServicioSentimientos
+from aplicacion.servicios.servicio_entidades import ServicioEntidades
+from infraestructura.algoritmos.spacy_sentimientos import AlgoritmoSpacySentimientos
+from infraestructura.algoritmos.spacy_entidades import AlgoritmoSpacyEntidades
 from .dto.analisis_dto import (
     AnalisisSentimientoRequest, AnalisisSentimientoResponse,
     ExtraccionEntidadesRequest, ExtraccionEntidadesResponse,

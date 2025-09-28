@@ -6,17 +6,17 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 import structlog
 
-from ...aplicacion.casos_uso.caso_uso_crear_usuario import CasoUsoCrearUsuario
-from ...aplicacion.dto.crear_usuario_dto import CrearUsuarioDTO
-from ...aplicacion.dto.usuario_dto import UsuarioDTO, UsuarioResumenDTO
-from ...aplicacion.excepciones.excepciones_aplicacion import (
+from aplicacion.casos_uso.caso_uso_crear_usuario import CasoUsoCrearUsuario
+from aplicacion.dto.crear_usuario_dto import CrearUsuarioDTO
+from aplicacion.dto.usuario_dto import UsuarioDTO, UsuarioResumenDTO
+from aplicacion.excepciones.excepciones_aplicacion import (
     UsuarioYaExisteError,
     EmailYaExisteError,
     NombreUsuarioYaExisteError,
     ErrorValidacionError
 )
-from ...infraestructura.persistencia.repositorio_usuario_sqlalchemy import RepositorioUsuarioSQLAlchemy
-from ...infraestructura.base_datos.configuracion_bd import obtener_sesion
+from infraestructura.persistencia.repositorio_usuario_sqlalchemy import RepositorioUsuarioSQLAlchemy
+from infraestructura.base_datos.configuracion_bd import obtener_sesion
 from ..dependencias.dependencias import obtener_repositorio_usuario
 from ..dto.respuesta_api_dto import RespuestaAPI, RespuestaErrorAPI
 

@@ -12,8 +12,8 @@ from contextlib import asynccontextmanager
 from typing import Dict, Any, List, Optional
 import asyncio
 
-from ...aplicacion.servicios.servicio_recomendaciones import ServicioRecomendaciones
-from ...infraestructura.algoritmos.algoritmo_colaborativo import AlgoritmoColaborativo
+from aplicacion.servicios.servicio_recomendaciones import ServicioRecomendaciones
+from infraestructura.algoritmos.algoritmo_colaborativo import AlgoritmoColaborativo
 from .dto.recomendacion_dto import (
     RecomendacionRequest, RecomendacionResponse,
     RecomendacionSimilarRequest, RecomendacionSimilarResponse,

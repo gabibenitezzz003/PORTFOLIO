@@ -7,8 +7,8 @@ from typing import Dict, Any, List, Optional
 import structlog
 from datetime import datetime
 
-from ...dominio.entidades.analisis_sentimiento import AnalisisSentimiento, CategoriaSentimiento, ModeloSentimiento
-from ...dominio.algoritmos.algoritmo_sentimientos import AlgoritmoSentimientos
+from dominio.entidades.analisis_sentimiento import AnalisisSentimiento, CategoriaSentimiento, ModeloSentimiento
+from dominio.algoritmos.algoritmo_sentimientos import AlgoritmoSentimientos
 from ...utilidades.decoradores.decorador_logging import logging_metodo
 from ...utilidades.decoradores.decorador_validacion import validar_parametros
 

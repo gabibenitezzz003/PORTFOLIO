@@ -61,11 +61,11 @@ ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 ENV MPLBACKEND=Agg
 
-# Descargar modelos de spaCy
-RUN python -m spacy download es_core_news_sm
-RUN python -m spacy download en_core_web_sm
-RUN python -m spacy download fr_core_news_sm
-RUN python -m spacy download de_core_news_sm
+# Descargar modelos de spaCy (opcional)
+RUN python -m spacy download es_core_news_sm || echo "Modelo español no disponible, continuando..."
+RUN python -m spacy download en_core_web_sm || echo "Modelo inglés no disponible, continuando..."
+RUN python -m spacy download fr_core_news_sm || echo "Modelo francés no disponible, continuando..."
+RUN python -m spacy download de_core_news_sm || echo "Modelo alemán no disponible, continuando..."
 
 # Comando por defecto
 CMD ["python", "-m", "presentacion.api.aplicacion"]

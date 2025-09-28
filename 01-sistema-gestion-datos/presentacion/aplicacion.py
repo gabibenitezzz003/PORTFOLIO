@@ -9,8 +9,8 @@ from contextlib import asynccontextmanager
 import structlog
 from typing import Dict, Any
 
-from ..infraestructura.base_datos.configuracion_bd import crear_tablas
-from ..aplicacion.excepciones.excepciones_aplicacion import ExcepcionAplicacion
+from infraestructura.base_datos.configuracion_bd import crear_tablas
+from aplicacion.excepciones.excepciones_aplicacion import ExcepcionAplicacion
 from .controladores.usuario_controlador import router as usuario_router
 from .middleware.middleware_logging import MiddlewareLogging
 from .middleware.middleware_errores import MiddlewareErrores

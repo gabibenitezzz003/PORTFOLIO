@@ -54,9 +54,9 @@ class UsuarioDTO(BaseModel):
         Returns:
             Entidad Usuario creada desde el DTO
         """
-        from ...dominio.entidades.usuario import Usuario
-        from ...dominio.value_objects.email import Email
-        from ...dominio.value_objects.nombre_usuario import NombreUsuario
+        from dominio.entidades.usuario import Usuario
+        from dominio.value_objects.email import Email
+        from dominio.value_objects.nombre_usuario import NombreUsuario
         
         return Usuario(
             id=self.id,

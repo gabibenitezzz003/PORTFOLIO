@@ -7,8 +7,8 @@ from typing import Dict, Any, List, Optional
 import structlog
 from datetime import datetime
 
-from ...dominio.entidades.recomendacion import Recomendacion, TipoAlgoritmo, TipoRecomendacion
-from ...dominio.algoritmos.algoritmo_recomendacion import AlgoritmoRecomendacion
+from dominio.entidades.recomendacion import Recomendacion, TipoAlgoritmo, TipoRecomendacion
+from dominio.algoritmos.algoritmo_recomendacion import AlgoritmoRecomendacion
 from ...utilidades.decoradores.decorador_logging import logging_metodo
 from ...utilidades.decoradores.decorador_validacion import validar_parametros
 

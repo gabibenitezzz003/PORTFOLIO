@@ -8,7 +8,7 @@ torch==2.1.1
 
 # Análisis de sentimientos avanzado
 vaderSentiment==3.3.2
-pysentimiento==0.6.0
+pysentimiento==0.7.3
 huggingface-hub==0.19.4
 
 # Procesamiento de texto

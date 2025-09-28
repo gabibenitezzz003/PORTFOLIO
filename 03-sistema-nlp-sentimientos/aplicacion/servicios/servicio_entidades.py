@@ -7,8 +7,8 @@ from typing import Dict, Any, List, Optional, Tuple
 import structlog
 from datetime import datetime
 
-from ...dominio.entidades.entidad_nombrada import EntidadNombrada, TipoEntidad
-from ...dominio.algoritmos.algoritmo_entidades import AlgoritmoEntidades
+from dominio.entidades.entidad_nombrada import EntidadNombrada, TipoEntidad
+from dominio.algoritmos.algoritmo_entidades import AlgoritmoEntidades
 from ...utilidades.decoradores.decorador_logging import logging_metodo
 from ...utilidades.decoradores.decorador_validacion import validar_parametros
 
