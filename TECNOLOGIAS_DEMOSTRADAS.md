@@ -2,11 +2,74 @@
 
 ## 🎯 Resumen 
 
-Este portfolio demuestra competencia técnica completa en el stack requerido por **GreenCode Software** para el puesto de **Desarrollador Python Backend orientado a datos**. Cada proyecto implementa las mejores prácticas de la industria y tecnologías de vanguardia.
+Este portfolio demuestra competencia técnica completa para el puesto de **Arquitecto de Software**, cubriendo tanto el stack de **Desarrollador Python Backend** como tecnologías avanzadas de **arquitectura de software**, **microservicios**, **DevOps** y **liderazgo técnico**. Cada proyecto implementa las mejores prácticas de la industria y tecnologías de vanguardia.
 
 ## 🛠️ Stack Tecnológico Principal
 
-### Backend & APIs
+### 🏛️ Arquitectura de Software (Proyectos 6-10)
+
+#### Lenguajes de Programación
+- **Java 17+** - Microservicios con Spring Boot
+- **TypeScript 5** - Frontend moderno con tipado estático
+- **JavaScript ES6+** - Desarrollo frontend y Node.js
+- **Python 3.11** - Backend y data science
+
+#### Frameworks y Librerías
+- **Spring Boot 3.2** - Microservicios Java
+- **Spring Cloud** - Service discovery, config, gateway
+- **React 18** - Frontend moderno
+- **Next.js 14** - Framework full-stack
+- **Vue.js 3** - Frontend alternativo
+- **Angular 17** - Framework enterprise
+- **Node.js 18** - Backend JavaScript
+- **Express.js** - Framework web Node.js
+
+#### Arquitecturas y Patrones
+- **Microservicios** - Arquitectura distribuida
+- **Event-Driven Architecture** - Comunicación asíncrona
+- **CQRS** - Command Query Responsibility Segregation
+- **Event Sourcing** - Almacenamiento de eventos
+- **Saga Pattern** - Transacciones distribuidas
+- **Clean Architecture** - Principios SOLID
+- **Domain-Driven Design** - Modelado de dominio
+
+#### Event Streaming y Messaging
+- **Apache Kafka** - Message broker distribuido
+- **Kafka Streams** - Procesamiento de streams
+- **Kafka Connect** - Integración con sistemas externos
+- **Redis Streams** - Streams en memoria
+- **RabbitMQ** - Message broker alternativo
+
+#### Observabilidad y Monitoreo
+- **Prometheus** - Métricas y alertas
+- **Grafana** - Dashboards y visualización
+- **Jaeger** - Distributed tracing
+- **ELK Stack** - Elasticsearch, Logstash, Kibana
+- **Fluentd** - Recolección de logs
+- **Micrometer** - Métricas de aplicación
+
+#### CI/CD y DevOps
+- **GitHub Actions** - CI/CD pipelines
+- **Jenkins** - Automatización de builds
+- **GitLab CI** - CI/CD integrado
+- **Docker** - Containerización
+- **Kubernetes** - Orquestación de contenedores
+- **Helm** - Gestión de paquetes K8s
+- **ArgoCD** - GitOps para despliegues
+
+#### Infrastructure as Code
+- **Terraform** - Provisioning de infraestructura
+- **Ansible** - Automatización y configuración
+- **Pulumi** - IaC moderno
+- **Crossplane** - Cloud-native IaC
+
+#### Cloud Platforms
+- **AWS** - Amazon Web Services
+- **Google Cloud Platform** - GCP
+- **Microsoft Azure** - Azure
+- **Multi-cloud** - Estrategias híbridas
+
+### 🐍 Backend & APIs (Proyectos 1-5)
 - **Python 3.11** - Lenguaje principal
 - **FastAPI** - APIs REST de alto rendimiento
 - **Pydantic** - Validación de datos y serialización
@@ -320,9 +383,58 @@ class PipelineETL:
 - **Casos de uso** reales
 - **Tutoriales** paso a paso
 
+## 🏛️ Proyectos de Arquitectura de Software
+
+### Proyecto 6: Microservicios con Java Spring Boot
+**Tecnologías Clave:** Java 17, Spring Boot, Spring Cloud, PostgreSQL, Redis, Kafka, Docker, Kubernetes
+- **Arquitectura:** Microservicios distribuidos con API Gateway
+- **Patrones:** Circuit Breaker, Retry, Bulkhead, Event-Driven
+- **Observabilidad:** Prometheus, Grafana, Jaeger, ELK Stack
+- **Escalabilidad:** Horizontal scaling, load balancing, auto-scaling
+
+### Proyecto 7: Sistema de Observabilidad
+**Tecnologías Clave:** Prometheus, Grafana, Jaeger, ELK Stack, Kubernetes, Terraform
+- **Métricas:** Prometheus con métricas personalizadas
+- **Logging:** ELK Stack con logging estructurado
+- **Tracing:** Jaeger para distributed tracing
+- **Alertas:** AlertManager con reglas inteligentes
+
+### Proyecto 8: Pipeline CI/CD
+**Tecnologías Clave:** GitHub Actions, Docker, Kubernetes, Terraform, Ansible, ArgoCD
+- **CI/CD:** Pipelines automatizados end-to-end
+- **IaC:** Terraform para provisioning
+- **GitOps:** ArgoCD para despliegues
+- **Testing:** Unit, integration, E2E tests
+
+### Proyecto 9: Frontend React/TypeScript
+**Tecnologías Clave:** React 18, TypeScript, Next.js, Redux Toolkit, Material-UI, Tailwind CSS
+- **Arquitectura:** Component-based con Clean Architecture
+- **Performance:** Code splitting, lazy loading, PWA
+- **Testing:** Jest, React Testing Library, Cypress
+- **State Management:** Redux Toolkit, React Query
+
+### Proyecto 10: Arquitectura Distribuida con Kafka
+**Tecnologías Clave:** Apache Kafka, Event Sourcing, CQRS, Saga Pattern, Spring Boot
+- **Event Streaming:** Kafka con processing en tiempo real
+- **Event Sourcing:** Almacenamiento de eventos
+- **CQRS:** Separación de comandos y consultas
+- **Saga Pattern:** Transacciones distribuidas
+
 ## 🎯 Competencias Demostradas
 
-### Técnicas
+### Técnicas - Arquitectura de Software
+- ✅ **Java 17+** con Spring Boot y microservicios
+- ✅ **TypeScript/JavaScript** con React, Angular, Vue.js
+- ✅ **Microservicios** y arquitecturas distribuidas
+- ✅ **Event-Driven Architecture** con Kafka
+- ✅ **CQRS/Event Sourcing** para escalabilidad
+- ✅ **CI/CD** con GitHub Actions y DevOps
+- ✅ **Kubernetes** y orquestación de contenedores
+- ✅ **Observabilidad** completa con métricas, logs y traces
+- ✅ **Infrastructure as Code** con Terraform
+- ✅ **Cloud Platforms** (AWS, GCP, Azure)
+
+### Técnicas - Backend Python
 - ✅ **Python** avanzado con async/await
 - ✅ **FastAPI** para APIs de alto rendimiento
 - ✅ **Pandas** para análisis de datos
@@ -333,13 +445,17 @@ class PipelineETL:
 - ✅ **Machine Learning** con scikit-learn
 - ✅ **Arquitectura** hexagonal y microservicios
 
-### Soft Skills
+### Soft Skills - Liderazgo Técnico
+- ✅ **Visión Estratégica** en diseño de arquitecturas
+- ✅ **Mentoría** y desarrollo de equipos
+- ✅ **Toma de Decisiones** técnicas informadas
+- ✅ **Comunicación** clara con stakeholders
 - ✅ **Clean Code** y principios SOLID
-- ✅ **Documentación** técnica clara
-- ✅ **Testing** automatizado
+- ✅ **Documentación** técnica exhaustiva
+- ✅ **Testing** automatizado y quality gates
 - ✅ **Monitoreo** y observabilidad
 - ✅ **DevOps** y automatización
-- ✅ **Resolución** de problemas
+- ✅ **Resolución** de problemas complejos
 - ✅ **Escalabilidad** y rendimiento
 
 ---

@@ -7,6 +7,10 @@
 - **Docker Compose** (versión 2.0 o superior)
 - **Git** (para clonar el repositorio)
 - **Curl** (para health checks)
+- **Java 17+** (para proyectos de microservicios)
+- **Node.js 18+** (para proyectos frontend)
+- **Maven 3.8+** (para proyectos Java)
+- **Kubernetes** (opcional, para despliegue en K8s)
 
 ### Recursos del Sistema
 - **RAM:** Mínimo 8GB, recomendado 16GB
@@ -256,9 +260,108 @@ API_SECRET_KEY=tu_secret_key_muy_largo
 EOF
 ```
 
+## 🏛️ Instalación de Proyectos de Arquitectura
+
+### Proyecto 6: Microservicios con Java Spring Boot
+```bash
+cd 06-arquitectura-microservicios-java
+
+# Prerrequisitos
+# - Java 17+
+# - Maven 3.8+
+# - Docker & Docker Compose
+
+# Instalar dependencias
+mvn clean install
+
+# Ejecutar con Docker Compose
+docker-compose up -d
+
+# Verificar servicios
+curl http://localhost:8080/health  # API Gateway
+curl http://localhost:8761         # Eureka Server
+curl http://localhost:3000         # Grafana
+```
+
+### Proyecto 7: Sistema de Observabilidad
+```bash
+cd 07-sistema-observabilidad-monitoreo
+
+# Ejecutar stack completo
+docker-compose up -d
+
+# Acceder a servicios
+# Grafana: http://localhost:3000 (admin/admin123)
+# Prometheus: http://localhost:9090
+# Jaeger: http://localhost:16686
+# Kibana: http://localhost:5601
+```
+
+### Proyecto 8: Pipeline CI/CD
+```bash
+cd 08-pipeline-cicd-devops
+
+# Configurar GitHub Actions
+gh secret set AWS_ACCESS_KEY_ID --body "your-access-key"
+gh secret set DOCKER_USERNAME --body "your-docker-username"
+
+# Ejecutar pipeline local
+./scripts/setup.sh
+
+# Verificar pipelines
+gh workflow list
+```
+
+### Proyecto 9: Frontend React/TypeScript
+```bash
+cd 09-frontend-react-typescript
+
+# Prerrequisitos
+# - Node.js 18+
+# - npm 9+
+
+# Instalar dependencias
+npm install
+
+# Ejecutar en desarrollo
+npm run dev
+
+# Build para producción
+npm run build
+
+# Ejecutar tests
+npm run test
+```
+
+### Proyecto 10: Arquitectura Distribuida con Kafka
+```bash
+cd 10-arquitectura-distribuida-kafka
+
+# Iniciar Kafka cluster
+docker-compose -f kafka-cluster/docker-compose.yml up -d
+
+# Verificar Kafka
+docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 --list
+
+# Ejecutar microservicios
+docker-compose up -d
+
+# Verificar servicios
+curl http://localhost:8080/health
+```
+
 ## 📚 Documentación Adicional
 
 ### Proyectos Individuales
+
+#### 🏛️ Proyectos de Arquitectura de Software
+- **Proyecto 6:** Ver `06-arquitectura-microservicios-java/README.md`
+- **Proyecto 7:** Ver `07-sistema-observabilidad-monitoreo/README.md`
+- **Proyecto 8:** Ver `08-pipeline-cicd-devops/README.md`
+- **Proyecto 9:** Ver `09-frontend-react-typescript/README.md`
+- **Proyecto 10:** Ver `10-arquitectura-distribuida-kafka/README.md`
+
+#### 🐍 Proyectos Backend Python
 - **Proyecto 1:** Ver `01-sistema-gestion-datos/README.md`
 - **Proyecto 2:** Ver `02-pipeline-procesamiento-datos/README.md`
 - **Proyecto 3:** Ver `03-sistema-nlp-sentimientos/README.md`
