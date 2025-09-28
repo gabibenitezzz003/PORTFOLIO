@@ -1,50 +1,117 @@
-# Portfolio - Desarrollador Python Backend
-Este portfolio reúne una colección de proyectos que demuestran mi experiencia en el desarrollo backend con Python, aplicando arquitectura hexagonal, principios SOLID, patrones de diseño modernos y metodologías de testing.
-Incluye soluciones que abarcan APIs REST con FastAPI, procesamiento y análisis de datos con Pandas, NLP con spaCy/NLTK, orquestación de workflows con Airflow, integración con bases de datos SQL y despliegue con Docker.
-El objetivo es mostrar mi capacidad para diseñar, implementar y mantener aplicaciones backend escalables, limpias y bien documentadas, siguiendo las mejores prácticas de la industria.
+# Portfolio - Arquitecto de Software
+Este portfolio reúne una colección de proyectos que demuestran mi experiencia como **Arquitecto de Software**, aplicando arquitecturas modernas, principios SOLID, patrones de diseño avanzados y metodologías de desarrollo ágil.
+Incluye soluciones que abarcan **microservicios con Java Spring Boot**, **arquitecturas distribuidas con Kafka**, **sistemas de observabilidad**, **pipelines CI/CD**, **frontend moderno con React/TypeScript** y **desarrollo backend con Python**.
+El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñar arquitecturas escalables**, **implementar mejores prácticas** y **gestionar la transformación tecnológica** de las organizaciones.
 
-## 🏗️ Arquitectura y Principios
+## 🏗️ Competencias de Arquitecto de Software
 
-### Arquitectura Hexagonal (Clean Architecture)
-- **Separación de responsabilidades** clara entre capas
-- **Inversión de dependencias** con interfaces
-- **Testabilidad** mejorada con mocks y stubs
-- **Escalabilidad** y mantenibilidad del código
+### Liderazgo Técnico
+- **Visión Estratégica**: Diseño de arquitecturas alineadas con objetivos de negocio
+- **Mentoría**: Guía y desarrollo de equipos de desarrollo
+- **Toma de Decisiones**: Evaluación de tecnologías y frameworks
+- **Comunicación**: Presentación clara de conceptos técnicos a stakeholders
 
-### Clean Code y Principios SOLID
-- **Single Responsibility Principle** - Cada clase tiene una responsabilidad
-- **Open/Closed Principle** - Abierto para extensión, cerrado para modificación
-- **Liskov Substitution Principle** - Subtipos reemplazables
-- **Interface Segregation Principle** - Interfaces específicas
-- **Dependency Inversion Principle** - Dependencias hacia abstracciones
+### Diseño de Arquitecturas
+- **Microservicios**: Arquitecturas distribuidas escalables
+- **Event-Driven**: Comunicación asíncrona entre servicios
+- **Clean Architecture**: Separación de responsabilidades
+- **Domain-Driven Design**: Modelado basado en el dominio de negocio
 
-### Patrones de Diseño Implementados
-- **Repository Pattern** - Abstracción de acceso a datos
-- **Service Layer Pattern** - Lógica de negocio encapsulada
-- **Factory Pattern** - Creación de objetos complejos
-- **Decorator Pattern** - Funcionalidad adicional sin modificar clases
-- **Observer Pattern** - Comunicación desacoplada
+### Patrones y Principios
+- **SOLID Principles**: Principios fundamentales de diseño
+- **Design Patterns**: Patrones de diseño avanzados
+- **CQRS/Event Sourcing**: Separación de comandos y consultas
+- **Saga Pattern**: Transacciones distribuidas
+- **Circuit Breaker**: Resiliencia y tolerancia a fallos
+
+### Metodologías y Procesos
+- **Agile/Scrum**: Metodologías ágiles de desarrollo
+- **DevOps**: Integración y despliegue continuo
+- **Infrastructure as Code**: Infraestructura versionada
+- **GitOps**: Operaciones basadas en Git
 
 ## 🚀 Tecnologías Demostradas
 
-### Imprescindibles
-- ✅ **Python** - 4+ años de experiencia con POO avanzada
-- ✅ **FastAPI** - APIs REST con arquitectura hexagonal
-- ✅ **Pandas** - Manipulación y procesamiento de datos
-- ✅ **NLP/PLN** - Procesamiento de lenguaje natural con spaCy
-- ✅ **Apache Airflow** - Orquestación de workflows
-- ✅ **PostgreSQL** - Base de datos relacional avanzada
-- ✅ **Docker** - Containerización de aplicaciones
+### Lenguajes de Programación
+- ✅ **Java 17+** - 8+ años con Spring Boot y microservicios
+- ✅ **Python** - 6+ años con FastAPI, Pandas y ML
+- ✅ **TypeScript/JavaScript** - 5+ años con React y Node.js
+- ✅ **PHP** - 4+ años con Laravel y Symfony
 
-### Valoradas
-- ✅ **Machine Learning** - Modelos de recomendación y clasificación
-- ✅ **Testing** - Pruebas automatizadas con pytest y TDD
-- ✅ **Cloud Computing** - Preparado para AWS/GCP/Azure
-- ✅ **Metodologías Ágiles** - Desarrollo iterativo y colaborativo
+### Frameworks y Librerías
+- ✅ **Spring Boot/Cloud** - Microservicios y APIs REST
+- ✅ **React/Angular/Vue.js** - Frontend moderno
+- ✅ **FastAPI/Django** - APIs Python de alto rendimiento
+- ✅ **Node.js/Express** - Backend JavaScript
+
+### Arquitecturas y Patrones
+- ✅ **Microservicios** - Arquitectura distribuida escalable
+- ✅ **Event-Driven Architecture** - Comunicación asíncrona
+- ✅ **CQRS/Event Sourcing** - Separación de comandos y consultas
+- ✅ **Saga Pattern** - Transacciones distribuidas
+- ✅ **Clean Architecture** - Principios SOLID y DDD
+
+### Infraestructura y DevOps
+- ✅ **Docker/Kubernetes** - Containerización y orquestación
+- ✅ **CI/CD** - GitHub Actions, Jenkins, GitLab CI
+- ✅ **Infrastructure as Code** - Terraform, Ansible, Pulumi
+- ✅ **Cloud Platforms** - AWS, GCP, Azure
+- ✅ **Monitoring** - Prometheus, Grafana, Jaeger, ELK Stack
+
+### Bases de Datos
+- ✅ **PostgreSQL/MySQL** - Bases de datos relacionales
+- ✅ **MongoDB/Redis** - Bases de datos NoSQL
+- ✅ **Apache Kafka** - Event streaming
+- ✅ **Elasticsearch** - Búsqueda y analytics
 
 ## 📁 Proyectos Incluidos
 
-### 1. [Sistema de Gestión de Datos con Arquitectura Hexagonal](./01-sistema-gestion-datos/)
+### 🏛️ **Proyectos de Arquitectura de Software**
+
+#### 6. [Arquitectura de Microservicios con Java Spring Boot](./06-arquitectura-microservicios-java/)
+**Tecnologías:** Java 17, Spring Boot, Spring Cloud, PostgreSQL, Redis, Kafka, Docker, Kubernetes
+- Arquitectura de microservicios escalable con Spring Boot
+- API Gateway con enrutamiento y filtros avanzados
+- Circuit breakers, retry patterns y bulkhead isolation
+- Event-driven architecture con Apache Kafka
+- Observabilidad completa con métricas, logs y traces
+- **Demuestra:** Liderazgo técnico, diseño de arquitecturas complejas, escalabilidad
+
+#### 7. [Sistema de Observabilidad y Monitoreo Avanzado](./07-sistema-observabilidad-monitoreo/)
+**Tecnologías:** Prometheus, Grafana, Jaeger, ELK Stack, Kubernetes, Terraform
+- Observabilidad completa con métricas, logs y traces
+- Dashboards dinámicos y alertas inteligentes
+- Análisis de performance y troubleshooting
+- SRE practices con SLI/SLO/SLA
+- **Demuestra:** DevOps, monitoreo de aplicaciones, optimización de rendimiento
+
+#### 8. [Pipeline CI/CD Completo con DevOps](./08-pipeline-cicd-devops/)
+**Tecnologías:** GitHub Actions, Docker, Kubernetes, Terraform, Ansible, ArgoCD
+- Pipeline end-to-end automatizado
+- Infrastructure as Code con Terraform
+- Testing automatizado y quality gates
+- GitOps con ArgoCD
+- **Demuestra:** Automatización, testing automatizado, metodologías ágiles
+
+#### 9. [Frontend Moderno con React/TypeScript](./09-frontend-react-typescript/)
+**Tecnologías:** React 18, TypeScript, Next.js, Redux Toolkit, Material-UI, Tailwind CSS
+- Arquitectura frontend escalable y mantenible
+- Performance optimizada con Core Web Vitals
+- Testing completo con Jest y Cypress
+- PWA con funcionalidades offline
+- **Demuestra:** Frameworks modernos, liderazgo técnico, arquitectura frontend
+
+#### 10. [Arquitectura Distribuida con Event Streaming](./10-arquitectura-distribuida-kafka/)
+**Tecnologías:** Apache Kafka, Event Sourcing, CQRS, Saga Pattern, Spring Boot
+- Event-driven architecture con Apache Kafka
+- Event Sourcing y CQRS implementados
+- Saga Pattern para transacciones distribuidas
+- Procesamiento de streams en tiempo real
+- **Demuestra:** Sistemas distribuidos, escalabilidad horizontal, patrones avanzados
+
+### 🐍 **Proyectos de Desarrollo Backend Python**
+
+#### 1. [Sistema de Gestión de Datos con Arquitectura Hexagonal](./01-sistema-gestion-datos/)
 **Tecnologías:** FastAPI, PostgreSQL, SQLAlchemy, Pydantic, Docker
 - Arquitectura hexagonal con separación de capas
 - Patrones Repository y Service Layer
