@@ -188,15 +188,14 @@ services:
     image: apache/airflow:2.7.3
     container_name: portfolio_airflow_webserver
     environment:
-      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow123@postgres-airflow:5432/airflow
-      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow123@postgres-airflow:5432/airflow
-      AIRFLOW__CELERY__BROKER_URL: redis://redis-airflow:6379/0
       AIRFLOW__CORE__FERNET_KEY: 'your-fernet-key-here'
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
       AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'true'
+      AIRFLOW__WEBSERVER__SECRET_KEY: 'your-secret-key-here'
     volumes:
       - ./04-orquestacion-airflow/dags:/opt/airflow/dags
       - ./04-orquestacion-airflow/plugins:/opt/airflow/plugins
@@ -208,7 +207,12 @@ services:
     restart: unless-stopped
     depends_on:
       - postgres-airflow
-      - redis-airflow
+    command: >
+      bash -c "
+        airflow db init &&
+        airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin &&
+        airflow webserver --host 0.0.0.0 --port 8080
+      "
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -220,10 +224,8 @@ services:
     image: apache/airflow:2.7.3
     container_name: portfolio_airflow_scheduler
     environment:
-      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow123@postgres-airflow:5432/airflow
-      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow123@postgres-airflow:5432/airflow
-      AIRFLOW__CELERY__BROKER_URL: redis://redis-airflow:6379/0
       AIRFLOW__CORE__FERNET_KEY: 'your-fernet-key-here'
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
@@ -236,7 +238,6 @@ services:
     restart: unless-stopped
     depends_on:
       - postgres-airflow
-      - redis-airflow
     command: airflow scheduler
 
   # ========================================
@@ -330,7 +331,8 @@ services:
       - postgres-proyecto1
     command: >
       bash -c "
-        pip install mlflow psycopg2-binary &&
+        apt-get update && apt-get install -y curl &&
+        pip install --no-cache-dir mlflow==2.8.1 psycopg2-binary==2.9.9 &&
         mlflow server --backend-store-uri postgresql://usuario:password123@postgres-proyecto1:5432/sistema_gestion_datos --default-artifact-root /opt/mlflow/artifacts --host 0.0.0.0 --port 5000
       "
     restart: unless-stopped
