@@ -1,0 +1,121 @@
+# Docker Compose para Pipeline de Procesamiento de Datos
+# Orquestación de servicios para análisis de datos
+
+version: '3.8'
+
+services:
+  # Pipeline principal
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pipeline_procesamiento_datos
+    environment:
+      # Configuración del pipeline
+      PIPELINE_BATCH_SIZE: 10000
+      PIPELINE_MAX_WORKERS: 4
+      PIPELINE_LOG_LEVEL: INFO
+      
+      # Configuración de reportes
+      REPORT_OUTPUT_DIR: /app/datos/reportes
+      REPORT_FORMAT: pdf,html
+      
+      # Configuración de visualizaciones
+      GRAPHICS_OUTPUT_DIR: /app/graficos
+      GRAPHICS_FORMAT: png,html
+      
+      # Base de datos (opcional)
+      DATABASE_URL: postgresql://usuario:password@postgres:5432/datos_empresa
+    volumes:
+      - ./datos:/app/datos
+      - ./graficos:/app/graficos
+      - ./logs:/app/logs
+    networks:
+      - pipeline_red
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    command: ["python", "-m", "pipeline.ejecutor"]
+
+  # Base de datos PostgreSQL (opcional)
+  postgres:
+    image: postgres:15-alpine
+    container_name: pipeline_postgres
+    environment:
+      POSTGRES_DB: datos_empresa
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pipeline_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario -d datos_empresa"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis para caché (opcional)
+  redis:
+    image: redis:7-alpine
+    container_name: pipeline_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - pipeline_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Jupyter Notebook para análisis interactivo
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pipeline_jupyter
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "pipeline123"
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/app/notebooks
+      - ./datos:/app/datos
+      - ./graficos:/app/graficos
+    networks:
+      - pipeline_red
+    restart: unless-stopped
+    command: ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+
+  # Servidor de archivos para reportes
+  nginx:
+    image: nginx:alpine
+    container_name: pipeline_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./datos/reportes:/usr/share/nginx/html/reportes
+      - ./graficos:/usr/share/nginx/html/graficos
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - pipeline_red
+    restart: unless-stopped
+
+# Volúmenes persistentes
+volumes:
+  postgres_data:
+    driver: local
+
+# Red personalizada
+networks:
+  pipeline_red:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16

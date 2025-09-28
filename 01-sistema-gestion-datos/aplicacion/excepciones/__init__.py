@@ -1,0 +1,1 @@
+# Excepciones de la aplicación

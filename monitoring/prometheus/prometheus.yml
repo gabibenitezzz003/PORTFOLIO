@@ -1,0 +1,111 @@
+# Configuración Prometheus para Portfolio Completo
+# Monitoreo de todos los servicios del portfolio
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "rules/*.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+scrape_configs:
+  # Prometheus mismo
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Proyecto 1: Sistema de Gestión de Datos
+  - job_name: 'api-proyecto1'
+    static_configs:
+      - targets: ['api-proyecto1:8001']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Proyecto 3: Sistema de NLP
+  - job_name: 'api-nlp-proyecto3'
+    static_configs:
+      - targets: ['api-nlp-proyecto3:8003']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Proyecto 4: Apache Airflow
+  - job_name: 'airflow-webserver'
+    static_configs:
+      - targets: ['airflow-webserver:8080']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Proyecto 5: Sistema de Recomendaciones
+  - job_name: 'api-recomendaciones-proyecto5'
+    static_configs:
+      - targets: ['api-recomendaciones-proyecto5:8005']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # MLflow
+  - job_name: 'mlflow'
+    static_configs:
+      - targets: ['mlflow:5000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Grafana
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Nginx
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:80']
+    metrics_path: '/nginx_status'
+    scrape_interval: 30s
+
+  # PostgreSQL - Proyecto 1
+  - job_name: 'postgres-proyecto1'
+    static_configs:
+      - targets: ['postgres-proyecto1:5432']
+    scrape_interval: 30s
+
+  # PostgreSQL - Proyecto 3
+  - job_name: 'postgres-proyecto3'
+    static_configs:
+      - targets: ['postgres-proyecto3:5432']
+    scrape_interval: 30s
+
+  # PostgreSQL - Airflow
+  - job_name: 'postgres-airflow'
+    static_configs:
+      - targets: ['postgres-airflow:5432']
+    scrape_interval: 30s
+
+  # PostgreSQL - Proyecto 5
+  - job_name: 'postgres-proyecto5'
+    static_configs:
+      - targets: ['postgres-proyecto5:5432']
+    scrape_interval: 30s
+
+  # Redis - Proyecto 3
+  - job_name: 'redis-proyecto3'
+    static_configs:
+      - targets: ['redis-proyecto3:6379']
+    scrape_interval: 30s
+
+  # Redis - Airflow
+  - job_name: 'redis-airflow'
+    static_configs:
+      - targets: ['redis-airflow:6379']
+    scrape_interval: 30s
+
+  # Redis - Proyecto 5
+  - job_name: 'redis-proyecto5'
+    static_configs:
+      - targets: ['redis-proyecto5:6379']
+    scrape_interval: 30s

@@ -1,0 +1,68 @@
+# Dependencias principales para NLP
+spacy==3.7.2
+nltk==3.8.1
+textblob==0.17.1
+scikit-learn==1.3.2
+transformers==4.35.2
+torch==2.1.1
+
+# Análisis de sentimientos avanzado
+vaderSentiment==3.3.2
+pysentimiento==0.6.0
+huggingface-hub==0.19.4
+
+# Procesamiento de texto
+regex==2023.10.3
+unidecode==1.3.7
+ftfy==6.2.0
+
+# API y web
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+websockets==12.0
+streamlit==1.28.1
+streamlit-option-menu==0.3.6
+
+# Base de datos y caché
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+redis==5.0.1
+alembic==1.12.1
+
+# Procesamiento de datos
+pandas==2.1.4
+numpy==1.24.4
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Utilidades
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+structlog==23.2.0
+tenacity==8.2.3
+tqdm==4.66.1
+
+# Autenticación y seguridad
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+httpx==0.25.2
+
+# Desarrollo
+black==23.11.0
+isort==5.12.0
+flake8==6.1.0
+mypy==1.7.1
+
+# Jupyter notebooks
+jupyter==1.0.0
+ipykernel==6.29.0
+ipywidgets==8.1.1

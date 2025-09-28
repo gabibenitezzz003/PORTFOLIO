@@ -1,0 +1,16 @@
+# Configuración de DataSource Prometheus para Grafana
+# Datasource automático para monitoreo del portfolio
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+    jsonData:
+      timeInterval: "15s"
+      queryTimeout: "60s"
+      httpMethod: "POST"

@@ -1,0 +1,482 @@
+# Docker Compose Principal - Portfolio Completo
+# Orquestación de todos los proyectos del portfolio para GreenCode Software
+
+version: '3.8'
+
+services:
+  # ========================================
+  # PROYECTO 1: Sistema de Gestión de Datos
+  # ========================================
+  
+  # Base de datos PostgreSQL para Proyecto 1
+  postgres-proyecto1:
+    image: postgres:15-alpine
+    container_name: portfolio_postgres_proyecto1
+    environment:
+      POSTGRES_DB: sistema_gestion_datos
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_proyecto1_data:/var/lib/postgresql/data
+      - ./01-sistema-gestion-datos/scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario -d sistema_gestion_datos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API FastAPI para Proyecto 1
+  api-proyecto1:
+    build:
+      context: ./01-sistema-gestion-datos
+      dockerfile: Dockerfile
+    container_name: portfolio_api_proyecto1
+    environment:
+      DATABASE_URL: postgresql://usuario:password123@postgres-proyecto1:5432/sistema_gestion_datos
+      API_HOST: 0.0.0.0
+      API_PORT: 8001
+    ports:
+      - "8001:8001"
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    depends_on:
+      - postgres-proyecto1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========================================
+  # PROYECTO 2: Pipeline de Procesamiento
+  # ========================================
+  
+  # Pipeline de datos
+  pipeline-proyecto2:
+    build:
+      context: ./02-pipeline-procesamiento-datos
+      dockerfile: Dockerfile
+    container_name: portfolio_pipeline_proyecto2
+    environment:
+      DATA_PATH: /app/datos
+      OUTPUT_PATH: /app/salida
+    volumes:
+      - ./02-pipeline-procesamiento-datos/datos:/app/datos
+      - ./02-pipeline-procesamiento-datos/salida:/app/salida
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    command: ["python", "ejemplo_uso.py"]
+
+  # ========================================
+  # PROYECTO 3: Sistema de NLP
+  # ========================================
+  
+  # Base de datos PostgreSQL para Proyecto 3
+  postgres-proyecto3:
+    image: postgres:15-alpine
+    container_name: portfolio_postgres_proyecto3
+    environment:
+      POSTGRES_DB: sistema_nlp
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_proyecto3_data:/var/lib/postgresql/data
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario -d sistema_nlp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis para Proyecto 3
+  redis-proyecto3:
+    image: redis:7-alpine
+    container_name: portfolio_redis_proyecto3
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_proyecto3_data:/data
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # API NLP para Proyecto 3
+  api-nlp-proyecto3:
+    build:
+      context: ./03-sistema-nlp-sentimientos
+      dockerfile: Dockerfile
+    container_name: portfolio_api_nlp_proyecto3
+    environment:
+      DATABASE_URL: postgresql://usuario:password123@postgres-proyecto3:5432/sistema_nlp
+      REDIS_URL: redis://redis-proyecto3:6379/0
+      API_HOST: 0.0.0.0
+      API_PORT: 8003
+    ports:
+      - "8003:8003"
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    depends_on:
+      - postgres-proyecto3
+      - redis-proyecto3
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========================================
+  # PROYECTO 4: Orquestación Airflow
+  # ========================================
+  
+  # Base de datos PostgreSQL para Airflow
+  postgres-airflow:
+    image: postgres:15-alpine
+    container_name: portfolio_postgres_airflow
+    environment:
+      POSTGRES_DB: airflow
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow123
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_airflow_data:/var/lib/postgresql/data
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow -d airflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis para Airflow
+  redis-airflow:
+    image: redis:7-alpine
+    container_name: portfolio_redis_airflow
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis_airflow_data:/data
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Airflow Web Server
+  airflow-webserver:
+    image: apache/airflow:2.7.3
+    container_name: portfolio_airflow_webserver
+    environment:
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow123@postgres-airflow:5432/airflow
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow123@postgres-airflow:5432/airflow
+      AIRFLOW__CELERY__BROKER_URL: redis://redis-airflow:6379/0
+      AIRFLOW__CORE__FERNET_KEY: 'your-fernet-key-here'
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'true'
+    volumes:
+      - ./04-orquestacion-airflow/dags:/opt/airflow/dags
+      - ./04-orquestacion-airflow/plugins:/opt/airflow/plugins
+      - ./04-orquestacion-airflow/logs:/opt/airflow/logs
+    ports:
+      - "8080:8080"
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    depends_on:
+      - postgres-airflow
+      - redis-airflow
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Airflow Scheduler
+  airflow-scheduler:
+    image: apache/airflow:2.7.3
+    container_name: portfolio_airflow_scheduler
+    environment:
+      AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow123@postgres-airflow:5432/airflow
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow123@postgres-airflow:5432/airflow
+      AIRFLOW__CELERY__BROKER_URL: redis://redis-airflow:6379/0
+      AIRFLOW__CORE__FERNET_KEY: 'your-fernet-key-here'
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    volumes:
+      - ./04-orquestacion-airflow/dags:/opt/airflow/dags
+      - ./04-orquestacion-airflow/plugins:/opt/airflow/plugins
+      - ./04-orquestacion-airflow/logs:/opt/airflow/logs
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    depends_on:
+      - postgres-airflow
+      - redis-airflow
+    command: airflow scheduler
+
+  # ========================================
+  # PROYECTO 5: Sistema de Recomendaciones
+  # ========================================
+  
+  # Base de datos PostgreSQL para Proyecto 5
+  postgres-proyecto5:
+    image: postgres:15-alpine
+    container_name: portfolio_postgres_proyecto5
+    environment:
+      POSTGRES_DB: recomendaciones
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_proyecto5_data:/var/lib/postgresql/data
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario -d recomendaciones"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis para Proyecto 5
+  redis-proyecto5:
+    image: redis:7-alpine
+    container_name: portfolio_redis_proyecto5
+    ports:
+      - "6382:6379"
+    volumes:
+      - redis_proyecto5_data:/data
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # API de Recomendaciones para Proyecto 5
+  api-recomendaciones-proyecto5:
+    build:
+      context: ./05-sistema-recomendaciones-ml
+      dockerfile: Dockerfile
+    container_name: portfolio_api_recomendaciones_proyecto5
+    environment:
+      DATABASE_URL: postgresql://usuario:password123@postgres-proyecto5:5432/recomendaciones
+      REDIS_URL: redis://redis-proyecto5:6379/0
+      API_HOST: 0.0.0.0
+      API_PORT: 8005
+    ports:
+      - "8005:8005"
+    volumes:
+      - ./05-sistema-recomendaciones-ml/modelos:/app/modelos
+      - ./05-sistema-recomendaciones-ml/datos:/app/datos
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    depends_on:
+      - postgres-proyecto5
+      - redis-proyecto5
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========================================
+  # SERVICIOS COMPARTIDOS
+  # ========================================
+  
+  # MLflow para experimentos
+  mlflow:
+    image: python:3.11-slim
+    container_name: portfolio_mlflow
+    environment:
+      MLFLOW_BACKEND_STORE_URI: postgresql://usuario:password123@postgres-proyecto1:5432/sistema_gestion_datos
+      MLFLOW_DEFAULT_ARTIFACT_ROOT: /opt/mlflow/artifacts
+    volumes:
+      - mlflow_artifacts:/opt/mlflow/artifacts
+    ports:
+      - "5000:5000"
+    networks:
+      - portfolio_red
+    depends_on:
+      - postgres-proyecto1
+    command: >
+      bash -c "
+        pip install mlflow psycopg2-binary &&
+        mlflow server --backend-store-uri postgresql://usuario:password123@postgres-proyecto1:5432/sistema_gestion_datos --default-artifact-root /opt/mlflow/artifacts --host 0.0.0.0 --port 5000
+      "
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Prometheus para métricas
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: portfolio_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - portfolio_red
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Grafana para dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: portfolio_grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin123
+      GF_USERS_ALLOW_SIGN_UP: false
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - portfolio_red
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx para proxy reverso
+  nginx:
+    image: nginx:alpine
+    container_name: portfolio_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    networks:
+      - portfolio_red
+    restart: unless-stopped
+    depends_on:
+      - api-proyecto1
+      - api-nlp-proyecto3
+      - airflow-webserver
+      - api-recomendaciones-proyecto5
+      - mlflow
+      - grafana
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========================================
+  # MONITOREO Y UTILIDADES
+  # ========================================
+  
+  # Monitor de salud general
+  healthcheck:
+    image: curlimages/curl:latest
+    container_name: portfolio_healthcheck
+    depends_on:
+      - api-proyecto1
+      - api-nlp-proyecto3
+      - airflow-webserver
+      - api-recomendaciones-proyecto5
+    networks:
+      - portfolio_red
+    command: |
+      sh -c '
+        echo "Verificando servicios del portfolio..."
+        curl -f http://api-proyecto1:8001/health || exit 1
+        curl -f http://api-nlp-proyecto3:8003/health || exit 1
+        curl -f http://airflow-webserver:8080/health || exit 1
+        curl -f http://api-recomendaciones-proyecto5:8005/health || exit 1
+        echo "Todos los servicios están funcionando correctamente"
+      '
+    restart: "no"
+
+# Volúmenes persistentes
+volumes:
+  # Proyecto 1
+  postgres_proyecto1_data:
+    driver: local
+  
+  # Proyecto 3
+  postgres_proyecto3_data:
+    driver: local
+  redis_proyecto3_data:
+    driver: local
+  
+  # Airflow
+  postgres_airflow_data:
+    driver: local
+  redis_airflow_data:
+    driver: local
+  
+  # Proyecto 5
+  postgres_proyecto5_data:
+    driver: local
+  redis_proyecto5_data:
+    driver: local
+  
+  # Servicios compartidos
+  mlflow_artifacts:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+# Red personalizada
+networks:
+  portfolio_red:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16

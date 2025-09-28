@@ -1,0 +1,286 @@
+# Docker Compose para Sistema de Recomendaciones ML
+# Orquestación de servicios para recomendaciones con machine learning
+
+version: '3.8'
+
+services:
+  # API principal de recomendaciones
+  api-recomendaciones:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sistema_recomendaciones_api
+    environment:
+      # Configuración de la API
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      API_WORKERS: 4
+      
+      # Base de datos
+      DATABASE_URL: postgresql://usuario:password@postgres:5432/recomendaciones
+      
+      # Redis
+      REDIS_URL: redis://redis:6379/0
+      
+      # Almacenamiento de modelos
+      STORAGE_TYPE: local
+      MODELOS_PATH: /app/modelos
+      
+      # Configuración de recomendaciones
+      DEFAULT_ALGORITHM: colaborativo
+      CACHE_TTL: 3600
+      MAX_RECOMMENDATIONS: 100
+      MIN_CONFIDENCE: 0.3
+      
+      # Logging
+      LOG_LEVEL: INFO
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./modelos:/app/modelos
+      - ./datos:/app/datos
+      - ./logs:/app/logs
+    networks:
+      - recomendaciones_red
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: recomendaciones_postgres
+    environment:
+      POSTGRES_DB: recomendaciones
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - recomendaciones_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario -d recomendaciones"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis para caché
+  redis:
+    image: redis:7-alpine
+    container_name: recomendaciones_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - recomendaciones_red
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Dashboard Streamlit
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recomendaciones_dashboard
+    environment:
+      STREAMLIT_SERVER_PORT: 8501
+      STREAMLIT_SERVER_ADDRESS: 0.0.0.0
+      STREAMLIT_SERVER_HEADLESS: true
+      API_URL: http://api-recomendaciones:8000
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./dashboard:/app/dashboard
+      - ./datos:/app/datos
+    networks:
+      - recomendaciones_red
+    restart: unless-stopped
+    depends_on:
+      - api-recomendaciones
+    command: ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
+  # MLflow para experimentos
+  mlflow:
+    image: python:3.11-slim
+    container_name: recomendaciones_mlflow
+    environment:
+      MLFLOW_BACKEND_STORE_URI: postgresql://usuario:password123@postgres:5432/recomendaciones
+      MLFLOW_DEFAULT_ARTIFACT_ROOT: /opt/mlflow/artifacts
+    volumes:
+      - mlflow_artifacts:/opt/mlflow/artifacts
+    ports:
+      - "5000:5000"
+    networks:
+      - recomendaciones_red
+    depends_on:
+      - postgres
+    command: >
+      bash -c "
+        pip install mlflow psycopg2-binary &&
+        mlflow server --backend-store-uri postgresql://usuario:password123@postgres:5432/recomendaciones --default-artifact-root /opt/mlflow/artifacts --host 0.0.0.0 --port 5000
+      "
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Prometheus para métricas
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: recomendaciones_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - recomendaciones_red
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Grafana para dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: recomendaciones_grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin123
+      GF_USERS_ALLOW_SIGN_UP: false
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - recomendaciones_red
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx para proxy reverso
+  nginx:
+    image: nginx:alpine
+    container_name: recomendaciones_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    networks:
+      - recomendaciones_red
+    restart: unless-stopped
+    depends_on:
+      - api-recomendaciones
+      - dashboard
+      - mlflow
+      - grafana
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Worker para entrenamiento de modelos
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recomendaciones_worker
+    environment:
+      # Configuración del worker
+      WORKER_TYPE: training
+      WORKER_QUEUE: recomendaciones_tasks
+      
+      # Base de datos
+      DATABASE_URL: postgresql://usuario:password123@postgres:5432/recomendaciones
+      
+      # Redis
+      REDIS_URL: redis://redis:6379/0
+      
+      # Almacenamiento
+      STORAGE_TYPE: local
+      MODELOS_PATH: /app/modelos
+    volumes:
+      - ./modelos:/app/modelos
+      - ./datos:/app/datos
+      - ./logs:/app/logs
+    networks:
+      - recomendaciones_red
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    command: ["python", "-m", "worker.main"]
+
+  # Monitor de salud
+  healthcheck:
+    image: curlimages/curl:latest
+    container_name: recomendaciones_healthcheck
+    depends_on:
+      - api-recomendaciones
+      - postgres
+      - redis
+    networks:
+      - recomendaciones_red
+    command: |
+      sh -c '
+        echo "Verificando servicios..."
+        curl -f http://api-recomendaciones:8000/health || exit 1
+        echo "Todos los servicios están funcionando"
+      '
+    restart: "no"
+
+# Volúmenes persistentes
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  mlflow_artifacts:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+# Red personalizada
+networks:
+  recomendaciones_red:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.24.0.0/16
