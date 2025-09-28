@@ -323,7 +323,4 @@ kubectl get pods -n monitoring
 4. **Cost Optimization**: Optimización de costos de observabilidad
 5. **Compliance**: Monitoreo de compliance y auditoría
 
----
 
-**Desarrollado por Gabriel - Arquitecto de Software**  
-*Demostrando experiencia en observabilidad, monitoreo y DevOps para arquitecturas de microservicios*
