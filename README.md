@@ -34,6 +34,7 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 
 ### Lenguajes de Programación
 - ✅ **Java 17+** - 8+ años con Spring Boot y microservicios
+- ✅ **Go 1.21+** - 5+ años con microservicios y concurrencia
 - ✅ **Python** - 6+ años con FastAPI, Pandas y ML
 - ✅ **TypeScript/JavaScript** - 5+ años con React y Node.js
 - ✅ **PHP** - 4+ años con Laravel y Symfony
@@ -108,6 +109,14 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - Saga Pattern para transacciones distribuidas
 - Procesamiento de streams en tiempo real
 - **Demuestra:** Sistemas distribuidos, escalabilidad horizontal, patrones avanzados
+
+#### 11. [Sistema de Notificaciones en Go](./11-sistema-notificaciones-go/)
+**Tecnologías:** Go 1.21+, Gin, GORM, WebSocket, PostgreSQL, Redis, MongoDB
+- Sistema de notificaciones en tiempo real con WebSocket
+- Clean Architecture implementada en Go
+- Concurrencia nativa con goroutines y channels
+- Múltiples canales de notificación (email, SMS, push, in-app)
+- **Demuestra:** Go avanzado, Clean Architecture, WebSocket, concurrencia
 
 ### 🐍 **Proyectos de Desarrollo Backend Python**
 
