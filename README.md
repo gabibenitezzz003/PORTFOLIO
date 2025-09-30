@@ -215,6 +215,7 @@ cd ../05-sistema-recomendaciones-ml && pip install -r requirements.txt
 - **Proyecto 9 (Frontend React):** http://localhost:3001/
 - **Proyecto 10 (Kafka):** http://localhost:8080/ (Kafka UI)
 - **Proyecto 11 (Go):** http://localhost:8082/
+- **Proyecto 12 (No-Code):** http://localhost:5678/ (N8N)
 
 ### Servicios de Monitoreo y Herramientas
 - **Airflow:** http://localhost/airflow/ (admin/admin)

@@ -184,6 +184,7 @@ function Show-URLs {
     Write-Host "  • Proyecto 9 (React): http://localhost:3001/" -ForegroundColor White
     Write-Host "  • Proyecto 10 (Kafka): http://localhost:8080/" -ForegroundColor White
     Write-Host "  • Proyecto 11 (Go): http://localhost:8082/" -ForegroundColor White
+    Write-Host "  • Proyecto 12 (No-Code): http://localhost:5678/" -ForegroundColor White
     Write-Host ""
     Write-Host "🔧 Servicios de Monitoreo:" -ForegroundColor Cyan
     Write-Host "  • Airflow: http://localhost/airflow/" -ForegroundColor White
