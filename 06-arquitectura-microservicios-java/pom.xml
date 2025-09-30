@@ -21,15 +21,8 @@
     </properties>
 
     <modules>
-        <module>puerta-enlace-api</module>
+        <module>api-gateway</module>
         <module>microservicios/servicio-usuarios</module>
-        <module>microservicios/servicio-pedidos</module>
-        <module>microservicios/servicio-pagos</module>
-        <module>microservicios/servicio-catalogo</module>
-        <module>microservicios/servicio-inventario</module>
-        <module>librerias-compartidas/utilidades-comunes</module>
-        <module>librerias-compartidas/seguridad-comun</module>
-        <module>librerias-compartidas/eventos-comunes</module>
     </modules>
 
     <dependencyManagement>
