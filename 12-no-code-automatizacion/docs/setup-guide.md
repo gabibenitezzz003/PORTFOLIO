@@ -194,9 +194,9 @@ docker-compose logs -f n8n
 - [GitHub Issues](https://github.com/gabibenitezzz003/PORTFOLIO/issues)
 
 ### **Contacto**
-- **Email:** gabriel@example.com
+- **Email:** gabibenitezzz003@gmail.com
 - **GitHub:** @gabibenitezzz003
-- **LinkedIn:** Gabriel Benitez
+- **LinkedIn:** www.linkedin.com/in/gabibenitezzz003
 
 ---
 

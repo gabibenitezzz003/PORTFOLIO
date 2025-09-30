@@ -118,6 +118,14 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - Múltiples canales de notificación (email, SMS, push, in-app)
 - **Demuestra:** Go avanzado, Clean Architecture, WebSocket, concurrencia
 
+#### 12. [Sistema de Automatización No-Code](./12-no-code-automatizacion/)
+**Tecnologías:** N8N, Zapier, Make.com, Webhooks, APIs REST, Docker
+- Automatización de procesos de negocio sin código
+- Workflows complejos con N8N para análisis inteligente
+- Integración con Zapier para conectores empresariales
+- Automatización con Make.com para workflows avanzados
+- **Demuestra:** Automatización, integración de sistemas, no-code solutions
+
 ### 🐍 **Proyectos de Desarrollo Backend Python**
 
 #### 1. [Sistema de Gestión de Datos con Arquitectura Hexagonal](./01-sistema-gestion-datos/)

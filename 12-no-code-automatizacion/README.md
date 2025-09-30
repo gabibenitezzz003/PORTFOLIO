@@ -2,7 +2,7 @@
 
 ## 📋 Descripción del Proyecto
 
-Este proyecto demuestra competencias en **automatización de procesos** y **integración de sistemas** utilizando herramientas no-code como N8N, Zapier, Make.com y otras plataformas de automatización. Se enfoca en crear flujos de trabajo eficientes que conecten diferentes servicios y automatizen tareas repetitivas.
+Este proyecto demuestra competencias en **automatización de procesos** y **integración de sistemas** utilizando herramientas no-code como N8N yZapier Se enfoca en crear flujos de trabajo eficientes que conecten diferentes servicios y automatizen tareas repetitivas.
 
 ## 🎯 Objetivos
 
@@ -213,13 +213,7 @@ Cada workflow incluye su propia documentación detallada:
 - [Zapier Developer Platform](https://zapier.com/developer/)
 - [Make.com Documentation](https://www.make.com/en/help)
 
-### **Tutoriales**
-- [No-Code Automation Best Practices](https://example.com)
-- [API Integration Patterns](https://example.com)
-- [Workflow Design Principles](https://example.com)
-
 ## 👥 Contribuciones
-
 Este proyecto está abierto a contribuciones. Para contribuir:
 
 1. Fork el repositorio
@@ -233,5 +227,5 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-**Desarrollado para GreenCode Software - Portfolio de Gabriel**  
+**Desarrollado para GreenCode Software - Portfolio de Gabriel Benitez**  
 *No-Code Automation | Workflow Design | System Integration | Process Optimization*

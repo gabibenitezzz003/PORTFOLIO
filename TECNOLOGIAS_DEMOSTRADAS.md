@@ -69,6 +69,13 @@ Este portfolio demuestra competencia técnica completa para el puesto de **Arqui
 - **Microsoft Azure** - Azure
 - **Multi-cloud** - Estrategias híbridas
 
+#### No-Code y Automatización
+- **N8N** - Automatización de workflows
+- **Zapier** - Integración de aplicaciones
+- **Make.com** - Automatización avanzada
+- **Webhooks** - Integración en tiempo real
+- **APIs REST** - Conectores personalizados
+
 ### 🐍 Backend & APIs (Proyectos 1-5)
 - **Python 3.11** - Lenguaje principal
 - **FastAPI** - APIs REST de alto rendimiento
@@ -420,6 +427,20 @@ class PipelineETL:
 - **CQRS:** Separación de comandos y consultas
 - **Saga Pattern:** Transacciones distribuidas
 
+### Proyecto 11: Sistema de Notificaciones en Go
+**Tecnologías Clave:** Go 1.21+, Gin, GORM, WebSocket, PostgreSQL, Redis, MongoDB
+- **Clean Architecture:** Implementada en Go con principios SOLID
+- **WebSocket:** Comunicación en tiempo real
+- **Concurrencia:** Goroutines y channels nativos
+- **Multi-canal:** Email, SMS, push, in-app notifications
+
+### Proyecto 12: Sistema de Automatización No-Code
+**Tecnologías Clave:** N8N, Zapier, Make.com, Webhooks, APIs REST, Docker
+- **No-Code Automation:** Workflows sin programación
+- **N8N:** Análisis inteligente y procesamiento de datos
+- **Zapier:** Integración con 5000+ aplicaciones
+- **Make.com:** Automatización avanzada de procesos
+
 ## 🎯 Competencias Demostradas
 
 ### Técnicas - Arquitectura de Software
@@ -433,6 +454,7 @@ class PipelineETL:
 - ✅ **Observabilidad** completa con métricas, logs y traces
 - ✅ **Infrastructure as Code** con Terraform
 - ✅ **Cloud Platforms** (AWS, GCP, Azure)
+- ✅ **No-Code Automation** con N8N, Zapier, Make.com
 
 ### Técnicas - Backend Python
 - ✅ **Python** avanzado con async/await
