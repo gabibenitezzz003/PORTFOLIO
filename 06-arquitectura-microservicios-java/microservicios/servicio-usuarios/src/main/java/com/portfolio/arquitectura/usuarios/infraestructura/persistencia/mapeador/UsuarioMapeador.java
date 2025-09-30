@@ -39,7 +39,7 @@ public class UsuarioMapeador {
     public Usuario aDominio(UsuarioEntidad entidad) {
         return Usuario.builder()
                 .id(entidad.getId())
-                .correoElectronico(new CorreoElectronico(entidad.getCorreoElectronico()))
+                .correoElectronico(CorreoElectronico.de(entidad.getCorreoElectronico()))
                 .nombreUsuario(entidad.getNombreUsuario())
                 .nombre(entidad.getNombre())
                 .apellido(entidad.getApellido())
