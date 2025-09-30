@@ -8,6 +8,7 @@ import com.portfolio.arquitectura.usuarios.dominio.objetoValor.CorreoElectronico
 import com.portfolio.arquitectura.usuarios.aplicacion.dto.SolicitudCrearUsuario;
 import com.portfolio.arquitectura.usuarios.aplicacion.dto.RespuestaUsuario;
 import com.portfolio.arquitectura.usuarios.aplicacion.mapeador.MapeadorUsuario;
+import com.portfolio.arquitectura.usuarios.aplicacion.servicios.PublicadorEventoUsuario;
 import com.portfolio.arquitectura.usuarios.aplicacion.excepcion.UsuarioYaExisteExcepcion;
 import com.portfolio.arquitectura.usuarios.aplicacion.excepcion.DatosUsuarioInvalidosExcepcion;
 
@@ -66,7 +67,7 @@ public class CasoUsoCrearUsuario {
 
         // Crear entidad usuario
         Usuario usuario = Usuario.builder()
-                .correoElectronico(correo.getValor())
+                .correoElectronico(correo)
                 .nombreUsuario(solicitud.getNombreUsuario())
                 .contrasena(codificadorContrasena.encode(solicitud.getContrasena()))
                 .nombre(solicitud.getNombre())

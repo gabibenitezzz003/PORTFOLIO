@@ -1,6 +1,7 @@
 package com.portfolio.arquitectura.usuarios.aplicacion.mapeador;
 
 import com.portfolio.arquitectura.usuarios.dominio.entidad.Usuario;
+import com.portfolio.arquitectura.usuarios.dominio.objetoValor.CorreoElectronico;
 import com.portfolio.arquitectura.usuarios.aplicacion.dto.RespuestaUsuario;
 import com.portfolio.arquitectura.usuarios.aplicacion.dto.SolicitudCrearUsuario;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class MapeadorUsuario {
     public RespuestaUsuario aRespuesta(Usuario usuario) {
         return RespuestaUsuario.builder()
                 .id(usuario.getId())
-                .correoElectronico(usuario.getCorreoElectronico())
+                .correoElectronico(usuario.getCorreoElectronico().toString())
                 .nombreUsuario(usuario.getNombreUsuario())
                 .nombre(usuario.getNombre())
                 .apellido(usuario.getApellido())
@@ -38,7 +39,7 @@ public class MapeadorUsuario {
      */
     public Usuario aEntidad(SolicitudCrearUsuario solicitud) {
         return Usuario.builder()
-                .correoElectronico(solicitud.getCorreoElectronico())
+                .correoElectronico(CorreoElectronico.de(solicitud.getCorreoElectronico()))
                 .nombreUsuario(solicitud.getNombreUsuario())
                 .nombre(solicitud.getNombre())
                 .apellido(solicitud.getApellido())
