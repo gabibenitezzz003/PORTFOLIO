@@ -67,9 +67,47 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 
 ## 📁 Proyectos Incluidos
 
-### 🏛️ **Proyectos de Arquitectura de Software**
+### 1. [Sistema de Gestión de Datos con Arquitectura Hexagonal](./01-sistema-gestion-datos/)
+**Tecnologías:** FastAPI, PostgreSQL, SQLAlchemy, Pydantic, Docker
+- Arquitectura hexagonal con separación de capas
+- Patrones Repository y Service Layer
+- Decoradores personalizados para logging y validación
+- Tests unitarios e integración con >95% cobertura
+- **Demuestra:** Clean Architecture, principios SOLID, testing automatizado
 
-#### 6. [Arquitectura de Microservicios con Java Spring Boot](./06-arquitectura-microservicios-java/)
+### 2. [Pipeline de Procesamiento de Datos](./02-pipeline-procesamiento-datos/)
+**Tecnologías:** Pandas, NumPy, Matplotlib, Seaborn
+- ETL pipeline con arquitectura modular
+- Análisis estadístico avanzado con POO
+- Visualizaciones interactivas
+- Reportes automatizados con decoradores
+- **Demuestra:** Data Engineering, análisis de datos, visualización
+
+### 3. [Sistema de Análisis de Sentimientos con NLP](./03-sistema-analisis-sentimientos/)
+**Tecnologías:** spaCy, NLTK, scikit-learn, FastAPI
+- Procesamiento de texto en tiempo real
+- Análisis de sentimientos multilingüe
+- Patrón Strategy para diferentes algoritmos
+- API REST con arquitectura hexagonal
+- **Demuestra:** NLP, Machine Learning, APIs REST
+
+### 4. [Orquestación de Workflows con Airflow](./04-orquestacion-workflows/)
+**Tecnologías:** Apache Airflow, Python, Docker
+- DAGs modulares con POO
+- Patrón Factory para creación de tareas
+- Monitoreo y alertas con decoradores
+- Integración con APIs externas
+- **Demuestra:** Orquestación, workflows, automatización
+
+### 5. [Sistema de Recomendaciones ML](./05-sistema-recomendaciones-ml/)
+**Tecnologías:** scikit-learn, pandas, FastAPI, PostgreSQL
+- Algoritmos de recomendación con patrón Strategy
+- Sistema de filtrado de contenido
+- API REST con arquitectura hexagonal
+- Métricas de evaluación automatizadas
+- **Demuestra:** Machine Learning, algoritmos de recomendación, APIs
+
+### 6. [Arquitectura de Microservicios con Java Spring Boot](./06-arquitectura-microservicios-java/)
 **Tecnologías:** Java 17, Spring Boot, Spring Cloud, PostgreSQL, Redis, Kafka, Docker, Kubernetes
 - Arquitectura de microservicios escalable con Spring Boot
 - API Gateway con enrutamiento y filtros avanzados
@@ -78,7 +116,7 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - Observabilidad completa con métricas, logs y traces
 - **Demuestra:** Liderazgo técnico, diseño de arquitecturas complejas, escalabilidad
 
-#### 7. [Sistema de Observabilidad y Monitoreo Avanzado](./07-sistema-observabilidad-monitoreo/)
+### 7. [Sistema de Observabilidad y Monitoreo Avanzado](./07-sistema-observabilidad-monitoreo/)
 **Tecnologías:** Prometheus, Grafana, Jaeger, ELK Stack, Kubernetes, Terraform
 - Observabilidad completa con métricas, logs y traces
 - Dashboards dinámicos y alertas inteligentes
@@ -86,7 +124,7 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - SRE practices con SLI/SLO/SLA
 - **Demuestra:** DevOps, monitoreo de aplicaciones, optimización de rendimiento
 
-#### 8. [Pipeline CI/CD Completo con DevOps](./08-pipeline-cicd-devops/)
+### 8. [Pipeline CI/CD Completo con DevOps](./08-pipeline-cicd-devops/)
 **Tecnologías:** GitHub Actions, Docker, Kubernetes, Terraform, Ansible, ArgoCD
 - Pipeline end-to-end automatizado
 - Infrastructure as Code con Terraform
@@ -94,7 +132,7 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - GitOps con ArgoCD
 - **Demuestra:** Automatización, testing automatizado, metodologías ágiles
 
-#### 9. [Frontend Moderno con React/TypeScript](./09-frontend-react-typescript/)
+### 9. [Frontend Moderno con React/TypeScript](./09-frontend-react-typescript/)
 **Tecnologías:** React 18, TypeScript, Next.js, Redux Toolkit, Material-UI, Tailwind CSS
 - Arquitectura frontend escalable y mantenible
 - Performance optimizada con Core Web Vitals
@@ -102,7 +140,7 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - PWA con funcionalidades offline
 - **Demuestra:** Frameworks modernos, liderazgo técnico, arquitectura frontend
 
-#### 10. [Arquitectura Distribuida con Event Streaming](./10-arquitectura-distribuida-kafka/)
+### 10. [Arquitectura Distribuida con Event Streaming](./10-arquitectura-distribuida-kafka/)
 **Tecnologías:** Apache Kafka, Event Sourcing, CQRS, Saga Pattern, Spring Boot
 - Event-driven architecture con Apache Kafka
 - Event Sourcing y CQRS implementados
@@ -110,7 +148,7 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - Procesamiento de streams en tiempo real
 - **Demuestra:** Sistemas distribuidos, escalabilidad horizontal, patrones avanzados
 
-#### 11. [Sistema de Notificaciones en Go](./11-sistema-notificaciones-go/)
+### 11. [Sistema de Notificaciones en Go](./11-sistema-notificaciones-go/)
 **Tecnologías:** Go 1.21+, Gin, GORM, WebSocket, PostgreSQL, Redis, MongoDB
 - Sistema de notificaciones en tiempo real con WebSocket
 - Clean Architecture implementada en Go
@@ -118,50 +156,13 @@ El objetivo es mostrar mi capacidad para **liderar equipos técnicos**, **diseñ
 - Múltiples canales de notificación (email, SMS, push, in-app)
 - **Demuestra:** Go avanzado, Clean Architecture, WebSocket, concurrencia
 
-#### 12. [Sistema de Automatización No-Code](./12-no-code-automatizacion/)
+### 12. [Sistema de Automatización No-Code](./12-no-code-automatizacion/)
 **Tecnologías:** N8N, Zapier, Make.com, Webhooks, APIs REST, Docker
 - Automatización de procesos de negocio sin código
 - Workflows complejos con N8N para análisis inteligente
 - Integración con Zapier para conectores empresariales
 - Automatización con Make.com para workflows avanzados
 - **Demuestra:** Automatización, integración de sistemas, no-code solutions
-
-### 🐍 **Proyectos de Desarrollo Backend Python**
-
-#### 1. [Sistema de Gestión de Datos con Arquitectura Hexagonal](./01-sistema-gestion-datos/)
-**Tecnologías:** FastAPI, PostgreSQL, SQLAlchemy, Pydantic, Docker
-- Arquitectura hexagonal con separación de capas
-- Patrones Repository y Service Layer
-- Decoradores personalizados para logging y validación
-- Tests unitarios e integración con >95% cobertura
-
-### 2. [Pipeline de Procesamiento de Datos](./02-pipeline-procesamiento-datos/)
-**Tecnologías:** Pandas, NumPy, Matplotlib, Seaborn
-- ETL pipeline con arquitectura modular
-- Análisis estadístico avanzado con POO
-- Visualizaciones interactivas
-- Reportes automatizados con decoradores
-
-### 3. [Sistema de Análisis de Sentimientos con NLP](./03-sistema-analisis-sentimientos/)
-**Tecnologías:** spaCy, NLTK, scikit-learn, FastAPI
-- Procesamiento de texto en tiempo real
-- Análisis de sentimientos multilingüe
-- Patrón Strategy para diferentes algoritmos
-- API REST con arquitectura hexagonal
-
-### 4. [Orquestación de Workflows con Airflow](./04-orquestacion-workflows/)
-**Tecnologías:** Apache Airflow, Python, Docker
-- DAGs modulares con POO
-- Patrón Factory para creación de tareas
-- Monitoreo y alertas con decoradores
-- Integración con APIs externas
-
-### 5. [Sistema de Recomendaciones ML](./05-sistema-recomendaciones-ml/)
-**Tecnologías:** scikit-learn, pandas, FastAPI, PostgreSQL
-- Algoritmos de recomendación con patrón Strategy
-- Sistema de filtrado de contenido
-- API REST con arquitectura hexagonal
-- Métricas de evaluación automatizadas
 
 ## 🚀 Instalación Rápida
 
@@ -211,12 +212,12 @@ cd ../05-sistema-recomendaciones-ml && pip install -r requirements.txt
 ### Portfolio Principal
 - **Nginx:** http://localhost (página principal con enlaces a todos los proyectos)
 
-### Proyectos Originales (Python Backend)
+### Proyectos del Portfolio (1-12)
 - **Proyecto 1 (API):** http://localhost/proyecto1/ (docs: /docs)
+- **Proyecto 2 (Datos):** http://localhost/proyecto2/ (docs: /docs)
 - **Proyecto 3 (NLP):** http://localhost/proyecto3/ (docs: /docs)
+- **Proyecto 4 (Airflow):** http://localhost/airflow/ (admin/admin)
 - **Proyecto 5 (ML):** http://localhost/proyecto5/ (docs: /docs)
-
-### Proyectos de Arquitectura de Software
 - **Proyecto 6 (Microservicios Java):** http://localhost:8081/
 - **Proyecto 7 (Observabilidad):** http://localhost:3000/
 - **Proyecto 8 (CI/CD):** http://localhost:8080/ (GitHub Actions)
@@ -261,7 +262,7 @@ docker-compose ps
 
 ## 📊 Métricas del Portfolio
 
-- **5 proyectos** completos y funcionales
+- **12 proyectos** completos y funcionales
 - **100% de cobertura** de tecnologías requeridas
 - **Arquitectura hexagonal** en todos los proyectos
 - **Clean Code** aplicado consistentemente
