@@ -35,71 +35,47 @@ Este proyecto demuestra competencias en **automatización de procesos** y **inte
 ```
 12-no-code-automatizacion/
 ├── README.md
+├── docker-compose.yml
+├── env.example
 ├── workflows/
 │   ├── n8n/
-│   │   ├── ecommerce-automation.json
-│   │   ├── social-media-scheduler.json
-│   │   ├── data-collection-pipeline.json
-│   │   └── monitoring-alerts.json
-│   ├── zapier/
-│   │   ├── crm-integration.json
-│   │   ├── email-automation.json
-│   │   └── file-processing.json
-│   └── make/
-│       ├── api-integration.json
-│       └── database-sync.json
+│   │   ├── Analisis inteligente/
+│   │   │   ├── analisis inteligente.md
+│   │   │   └── Analisis_inteligente.json
+│   │   ├── Calendario/
+│   │   │   ├── calendario_diagnovet.md
+│   │   │   └── calendario_diagnovet++.json
+│   │   └── Chatbot/
+│   │       ├── chatbot_diagnovet_final.json
+│   │       └── chatbot_diagnovet_readme.md
+│   └── zapier/
+│       └── PLUGNPLAY_AUTOMATIZACION - v3.png
 ├── configs/
-│   ├── n8n-config.json
-│   ├── webhook-endpoints.json
-│   └── environment-variables.json
-├── docs/
-│   ├── setup-guide.md
-│   ├── workflow-documentation.md
-│   └── troubleshooting.md
-└── docker-compose.yml
+│   └── n8n-config.json
+└── docs/
+    └── setup-guide.md
 ```
 
 ## 🚀 Workflows Implementados
 
-### **1. E-commerce Automation (N8N)**
-- **Descripción:** Automatización completa del proceso de ventas
-- **Funcionalidades:**
-  - Sincronización de inventario
-  - Notificaciones de pedidos
-  - Actualización de precios
-  - Generación de reportes
+### **1. Análisis Inteligente (N8N)**
+- **Archivo:** `workflows/n8n/Analisis inteligente/Analisis_inteligente.json`
+- **Documentación:** `workflows/n8n/Analisis inteligente/analisis inteligente.md`
+- **Descripción:** Sistema de análisis inteligente de datos con procesamiento avanzado
 
-### **2. Social Media Scheduler (N8N)**
-- **Descripción:** Programación automática de contenido
-- **Funcionalidades:**
-  - Publicación en múltiples redes
-  - Análisis de engagement
-  - Programación inteligente
-  - Monitoreo de menciones
+### **2. Calendario Diagnovet (N8N)**
+- **Archivo:** `workflows/n8n/Calendario/calendario_diagnovet++.json`
+- **Documentación:** `workflows/n8n/Calendario/calendario_diagnovet.md`
+- **Descripción:** Sistema de gestión de calendarios especializado para veterinarias
 
-### **3. Data Collection Pipeline (N8N)**
-- **Descripción:** Recolección y procesamiento de datos
-- **Funcionalidades:**
-  - Scraping de sitios web
-  - Procesamiento de APIs
-  - Almacenamiento en base de datos
-  - Limpieza y validación
+### **3. Chatbot Diagnovet (N8N)**
+- **Archivo:** `workflows/n8n/Chatbot/chatbot_diagnovet_final.json`
+- **Documentación:** `workflows/n8n/Chatbot/chatbot_diagnovet_readme.md`
+- **Descripción:** Chatbot inteligente para atención al cliente veterinario
 
-### **4. CRM Integration (Zapier)**
-- **Descripción:** Integración de sistemas CRM
-- **Funcionalidades:**
-  - Sincronización de contactos
-  - Automatización de seguimiento
-  - Generación de leads
-  - Reportes automáticos
-
-### **5. Monitoring & Alerts (Make.com)**
-- **Descripción:** Sistema de monitoreo y alertas
-- **Funcionalidades:**
-  - Monitoreo de APIs
-  - Alertas por email/SMS
-  - Dashboard de métricas
-  - Escalamiento automático
+### **4. Automatización PlugnPlay (Zapier)**
+- **Archivo:** `workflows/zapier/PLUGNPLAY_AUTOMATIZACION - v3.png`
+- **Descripción:** Sistema de automatización plug-and-play para integración rápida
 
 ## 🔧 Configuración
 
@@ -218,9 +194,21 @@ MAKE_WEBHOOK_URL=your_webhook_url
 - [ ] Security hardening
 - [ ] Documentation
 
+## 📚 Documentación de Workflows
+
+Cada workflow incluye su propia documentación detallada:
+
+### **N8N Workflows**
+- **Análisis Inteligente:** Ver `workflows/n8n/Analisis inteligente/analisis inteligente.md`
+- **Calendario Diagnovet:** Ver `workflows/n8n/Calendario/calendario_diagnovet.md`
+- **Chatbot Diagnovet:** Ver `workflows/n8n/Chatbot/chatbot_diagnovet_readme.md`
+
+### **Zapier Workflows**
+- **PlugnPlay Automatización:** Ver `workflows/zapier/PLUGNPLAY_AUTOMATIZACION - v3.png`
+
 ## 📚 Recursos Adicionales
 
-### **Documentación**
+### **Documentación Oficial**
 - [N8N Documentation](https://docs.n8n.io/)
 - [Zapier Developer Platform](https://zapier.com/developer/)
 - [Make.com Documentation](https://www.make.com/en/help)

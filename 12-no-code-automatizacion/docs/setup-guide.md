@@ -25,7 +25,7 @@ cd PORTFOLIO/12-no-code-automatizacion
 ### **2. Configurar Variables de Entorno**
 ```bash
 # Crear archivo .env
-cp .env.example .env
+cp env.example .env
 
 # Editar variables
 nano .env
@@ -141,29 +141,29 @@ docker-compose logs -f n8n
 
 ## 🔄 Workflows de Ejemplo
 
-### **1. E-commerce Automation**
-- **Archivo:** `workflows/n8n/ecommerce-automation.json`
-- **Descripción:** Automatización de tienda online
+### **1. Análisis Inteligente**
+- **Archivo:** `workflows/n8n/Analisis inteligente/Analisis_inteligente.json`
+- **Descripción:** Sistema de análisis inteligente de datos
 - **Funcionalidades:**
-  - Sincronización de inventario
-  - Notificaciones de pedidos
-  - Actualización de precios
+  - Procesamiento de datos
+  - Análisis predictivo
+  - Generación de reportes
 
-### **2. Social Media Scheduler**
-- **Archivo:** `workflows/n8n/social-media-scheduler.json`
-- **Descripción:** Programación de contenido
+### **2. Calendario Diagnovet**
+- **Archivo:** `workflows/n8n/Calendario/calendario_diagnovet++.json`
+- **Descripción:** Sistema de gestión de calendarios para veterinarias
 - **Funcionalidades:**
-  - Publicación automática
-  - Análisis de engagement
-  - Programación inteligente
+  - Programación de citas
+  - Notificaciones automáticas
+  - Gestión de horarios
 
-### **3. Data Collection Pipeline**
-- **Archivo:** `workflows/n8n/data-collection-pipeline.json`
-- **Descripción:** Recolección de datos
+### **3. Chatbot Diagnovet**
+- **Archivo:** `workflows/n8n/Chatbot/chatbot_diagnovet_final.json`
+- **Descripción:** Chatbot inteligente para atención al cliente
 - **Funcionalidades:**
-  - Scraping web
-  - Procesamiento de APIs
-  - Almacenamiento en BD
+  - Respuestas automáticas
+  - Escalamiento a humanos
+  - Integración con CRM
 
 ## 📈 Optimización
 
