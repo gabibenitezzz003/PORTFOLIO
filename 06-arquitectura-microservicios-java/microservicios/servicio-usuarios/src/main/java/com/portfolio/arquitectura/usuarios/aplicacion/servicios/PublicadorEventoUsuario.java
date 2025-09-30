@@ -24,7 +24,7 @@ public class PublicadorEventoUsuario {
     public void publicarUsuarioCreado(Usuario usuario) {
         try {
             EventoUsuarioCreado evento = EventoUsuarioCreado.builder()
-                    .usuarioId(usuario.getId())
+                    .usuarioId(usuario.getId().toString())
                     .correoElectronico(usuario.getCorreoElectronico().toString())
                     .nombreUsuario(usuario.getNombreUsuario())
                     .nombre(usuario.getNombre())
@@ -47,7 +47,7 @@ public class PublicadorEventoUsuario {
     public void publicarSolicitudVerificacionCorreo(Usuario usuario) {
         try {
             EventoSolicitudVerificacionCorreo evento = EventoSolicitudVerificacionCorreo.builder()
-                    .usuarioId(usuario.getId())
+                    .usuarioId(usuario.getId().toString())
                     .correoElectronico(usuario.getCorreoElectronico().toString())
                     .nombreUsuario(usuario.getNombreUsuario())
                     .fechaCreacion(usuario.getFechaCreacion())

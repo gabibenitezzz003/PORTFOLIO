@@ -19,7 +19,7 @@ public class UsuarioMapeador {
     public UsuarioEntidad aEntidad(Usuario usuario) {
         return UsuarioEntidad.builder()
                 .id(usuario.getId())
-                .correoElectronico(usuario.getCorreoElectronico().getValor())
+                .correoElectronico(usuario.getCorreoElectronico().toString())
                 .nombreUsuario(usuario.getNombreUsuario())
                 .nombre(usuario.getNombre())
                 .apellido(usuario.getApellido())

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.portfolio.arquitectura.usuarios.dominio.objetoValor.CorreoElectronico;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public class Usuario {
     private UUID id;
 
     @Column(unique = true, nullable = false)
-    private String correoElectronico;
+    private CorreoElectronico correoElectronico;
 
     @Column(unique = true, nullable = false)
     private String nombreUsuario;
